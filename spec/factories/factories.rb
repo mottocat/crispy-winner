@@ -8,4 +8,11 @@ FactoryGirl.define do
     name Faker::Name.title
     brand Faker::Company.name
   end
+
+  factory :user do
+    name { Faker::Name.name }
+    email { Faker::Internet.email }
+    password "secret"
+    password_confirmation "secret"
+  end
 end
