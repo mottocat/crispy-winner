@@ -15,4 +15,10 @@ FactoryGirl.define do
     password "secret"
     password_confirmation "secret"
   end
+
+  factory :usage_manifest do
+    user
+    product
+    status :using
+  end
 end

@@ -1,4 +1,33 @@
-<p id="notice"><%= notice %></p>
+<% if user_signed_in? && (um = current_user.usage_manifest_for(@product)) %>
+  
+  I am <%=  um.status %> 
+  this product. 
+
+  <%= link_to "Cancel",
+              [@product, :usage_manifests],
+              method: :delete %>
+
+<% else %>
+
+  <%= form_for [@product, UsageManifest.find_or_initialize_by(product: @product, user: current_user)] do |f| %>
+    
+    I am
+    
+    <%= f.select :status, 
+                  UsageManifest.statuses.keys,
+                  include_blank: true %>
+
+    this product.
+
+    <% if user_signed_in? %>
+      <%= f.submit "Save" %>
+    <% else %>
+      <%= f.submit "Save", disabled: true %>      
+    <% end %>
+
+  <% end %>
+
+<% end %>
 
 <p>
   <strong>Name:</strong>
