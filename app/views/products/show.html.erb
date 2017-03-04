@@ -1,6 +1,6 @@
 <% if user_signed_in? && (um = current_user.usage_manifest_for(@product)) %>
   
-  I am <%=  um.status %> 
+  I <%=  um.using? ? "am using" : "used to use" %> 
   this product. 
 
   <%= link_to "Cancel",
@@ -11,10 +11,11 @@
 
   <%= form_for [@product, UsageManifest.find_or_initialize_by(product: @product, user: current_user)] do |f| %>
     
-    I am
+    I
     
     <%= f.select :status, 
-                  UsageManifest.statuses.keys,
+                  # UsageManifest.statuses.keys,
+                  [["am using", "using"], ["used to use", "used"]],
                   include_blank: true %>
 
     this product.

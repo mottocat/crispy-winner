@@ -11,14 +11,14 @@ RSpec.describe "Usage Manifest", type: :feature do
   }
 
   it "user can check the product as used" do
-    select "used"
+    select "used to use"
     click_on "Save"
 
-    expect(page).to have_content("I am used this product.")
+    expect(page).to have_content("I used to use this product.")
   end
 
-  it "user can check the product as used" do
-    select "using"
+  it "user can check the product as using" do
+    select "am using"
     click_on "Save"
 
     expect(page).to have_content("I am using this product.")
@@ -30,8 +30,8 @@ RSpec.describe "Usage Manifest", type: :feature do
     visit product_path(product)
     click_link "Cancel" 
 
-    expect(page).to_not have_content("I am used this product.")
     expect(page).to_not have_content("I am using this product.")
+    expect(page).to_not have_content("I used to use this product.")
   end
 
 end
