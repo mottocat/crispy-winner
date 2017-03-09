@@ -21,4 +21,15 @@ FactoryGirl.define do
     product
     status :using
   end
+
+  factory :product_usage do
+    user
+    product_name Faker::Name.title
+    usage_status :using
+    images do 
+      [Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'images', 'products', 'product1.jpg')),
+      Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'images', 'products', 'product1.jpg'))]
+    end
+    comment_body Faker::Lorem.paragraph
+  end
 end
