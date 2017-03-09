@@ -8,4 +8,7 @@ class UsageManifest < ApplicationRecord
 
   # Validations
   validates :user, :product, :status, presence: true
+
+  # Scopes
+  scope :with_status, ->(status) { where(status: status) }
 end

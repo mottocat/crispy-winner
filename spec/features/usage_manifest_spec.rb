@@ -34,4 +34,14 @@ RSpec.describe "Usage Manifest", type: :feature do
     expect(page).to_not have_content("I used to use this product.")
   end
 
+  it "shows total used or using users" do
+    user.use! product, status: :using
+    visit product_path(product)
+    expect(page).to have_content("1 users using this product now")
+
+    user.use! product, status: :used
+    visit product_path(product)
+    expect(page).to have_content("1 users used this product before")
+  end
+
 end

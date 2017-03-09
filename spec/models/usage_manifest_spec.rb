@@ -31,4 +31,13 @@ RSpec.describe UsageManifest, type: :model do
     expect(UsageManifest.statuses[:used]).to eq(0)
   end
 
+  it "status scope" do
+    expect(described_class.with_status(:used)).to eq([usage_manifest])
+    expect(described_class.with_status(:using)).to_not eq([usage_manifest])
+
+    usage_manifest.update(status: :using)
+    expect(described_class.with_status(:used)).to_not eq([usage_manifest])
+    expect(described_class.with_status(:using)).to eq([usage_manifest])
+  end 
+
 end

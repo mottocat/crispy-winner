@@ -1,3 +1,9 @@
+<%= @product.usage_manifests.with_status(:using).count %> users using this product now,
+<br>
+
+<%= @product.usage_manifests.with_status(:used).count %> users used this product before.
+<br>
+
 <% if user_signed_in? && (um = current_user.usage_manifest_for(@product)) %>
   
   I <%=  um.using? ? "am using" : "used to use" %> 
