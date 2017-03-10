@@ -6,8 +6,7 @@
 
 <% if user_signed_in? && (um = current_user.usage_manifest_for(@product)) %>
   
-  I <%=  um.using? ? "am using" : "used to use" %> 
-  this product. 
+  <%=  humanize_status_for um.status %> 
 
   <%= link_to "Cancel",
               [@product, :usage_manifests],
@@ -16,15 +15,12 @@
 <% else %>
 
   <%= form_for [@product, UsageManifest.find_or_initialize_by(product: @product, user: current_user)] do |f| %>
-    
-    I
-    
+        
     <%= f.select :status, 
                   # UsageManifest.statuses.keys,
-                  [["am using", "using"], ["used to use", "used"]],
+                  [[humanize_status_for("using"), "using"],
+                   [humanize_status_for("used"), "used"]],
                   include_blank: true %>
-
-    this product.
 
     <% if user_signed_in? %>
       <%= f.submit "Save" %>

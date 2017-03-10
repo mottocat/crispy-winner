@@ -11,17 +11,17 @@ RSpec.describe "Usage Manifest", type: :feature do
   }
 
   it "user can check the product as used" do
-    select "used to use"
+    select "I used this product before"
     click_on "Save"
 
-    expect(page).to have_content("I used to use this product.")
+    expect(page).to have_content("I used this product before")
   end
 
   it "user can check the product as using" do
-    select "am using"
+    select "I am using this product now"
     click_on "Save"
 
-    expect(page).to have_content("I am using this product.")
+    expect(page).to have_content("I am using this product now")
   end
 
   it "user can cancel to the product usage status" do
@@ -30,8 +30,8 @@ RSpec.describe "Usage Manifest", type: :feature do
     visit product_path(product)
     click_link "Cancel" 
 
-    expect(page).to_not have_content("I am using this product.")
-    expect(page).to_not have_content("I used to use this product.")
+    expect(page).to_not have_content("I am using this product now.")
+    expect(page).to_not have_content("I used this product before.")
   end
 
   it "shows total used or using users" do
