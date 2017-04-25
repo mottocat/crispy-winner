@@ -19,8 +19,13 @@
       , <%= link_to 'Sign up', new_user_registration_path %>
     <% end %>
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <hr />
+
+    <% if notice || alert %>
+      <%= notice %>
+      <%= alert %>
+      <hr />
+    <% end %>
 
     <%= yield %>
   </body>
