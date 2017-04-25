@@ -1,9 +1,17 @@
+<br />
+
+<hr />
+<hr />
+<hr />
+<h1><%= @product.brand %> <%= @product.name %></h1>
+
+
 <%= @product.usage_manifests.with_status(:using).count %> users using this product now,
 <br>
 
 <%= @product.usage_manifests.with_status(:used).count %> users used this product before.
-<br>
 
+<br />
 <% if user_signed_in? && (um = current_user.usage_manifest_for(@product)) %>
   
   <%=  humanize_status_for um.status %> 
@@ -26,22 +34,36 @@
       <%= f.submit "Save" %>
     <% else %>
       <%= f.submit "Save", disabled: true %>      
+      You must login
     <% end %>
 
   <% end %>
 
 <% end %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @product.name %>
-</p>
+<br />
+<br />
+<hr />
+<hr />
+<hr />
+<h2>Comments</h2>
+<hr />
+
+  
+<% @product.comments.each do |comment| %>
+  <%= comment.body %>
+  <%= comment.created_at %>
+  <hr />
+<% end %>
 
 <p>
-  <strong>Brand:</strong>
-  <%= @product.brand %>
+  <%= render "comments/form", product: @product, comment: Comment.new %>
 </p>
 
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+<hr />
+<hr />
+<hr />
+
+<%= link_to 'Edit', edit_product_path(@product) %>,
+<%= link_to 'Back', products_path %>,
 <%= link_to 'Comments', product_comments_path(@product) %>

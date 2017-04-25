@@ -10,6 +10,10 @@
 
   <body>
 
+
+    <%= link_to "Home", root_path  %>
+    <hr />
+
     <% if user_signed_in? %>
       Welcome <%= current_user.email %>
       , <%= link_to 'Edit User', edit_user_registration_path %>
