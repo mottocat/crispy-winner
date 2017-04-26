@@ -21,6 +21,7 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params).tap do |c|
       c.product = @product
+      c.author = current_user
     end
 
     respond_to do |format|

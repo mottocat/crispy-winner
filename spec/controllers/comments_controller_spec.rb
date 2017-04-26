@@ -24,8 +24,13 @@ RSpec.describe CommentsController, type: :controller do
   # Comment. As you add validations to Comment, be sure to
   # adjust the attributes here as well.
   let(:product) { create :product  }
-  let!(:comment) { create :comment, product: product }
+  let(:author) { create :user  }
+  let!(:comment) { create :comment, product: product, author: author }
 
+  before do
+    sign_in author
+  end
+  
   describe "GET #show" do
     it "assigns the requested comment as @comment" do
       get :show, params: {id: comment.to_param}

@@ -9,6 +9,7 @@ RSpec.describe User, type: :model do
 
   it { is_expected.to have_many :usage_manifests }
   it { is_expected.to have_many :products }
+  it { is_expected.to have_many(:comments).with_foreign_key('author_id') }
 
   it "#use!" do
     manifest = user.use! product, status: :using
