@@ -1,68 +1,6 @@
-<br />
-
-<hr />
-<hr />
-<hr />
-<h1><%= @product.brand %> <%= @product.name %></h1>
+<%= render "product_header" %>
 
 
-<%= @product.usage_manifests.with_status(:using).count %> users using this product now,
-<br>
-
-<%= @product.usage_manifests.with_status(:used).count %> users used this product before.
-
-<br />
-<% if user_signed_in? && (um = current_user.usage_manifest_for(@product)) %>
-  
-  <%=  humanize_status_for um.status %> 
-
-  <%= link_to "Cancel",
-              [@product, :usage_manifests],
-              method: :delete %>
-
-<% else %>
-
-  <%= form_for [@product, UsageManifest.find_or_initialize_by(product: @product, user: current_user)] do |f| %>
-        
-    <%= f.select :status, 
-                  # UsageManifest.statuses.keys,
-                  [[humanize_status_for("using"), "using"],
-                   [humanize_status_for("used"), "used"]],
-                  include_blank: true %>
-
-    <% if user_signed_in? %>
-      <%= f.submit "Save" %>
-    <% else %>
-      <%= f.submit "Save", disabled: true %>      
-      You must login
-    <% end %>
-
-  <% end %>
-
-<% end %>
-
-<br />
-<br />
-<hr />
-<hr />
-<hr />
-<h2>Comments</h2>
-<hr />
-
-  
-<% @product.comments.each do |comment| %>
-  <%= comment.body %>
-  <%= comment.created_at %>
-  <hr />
-<% end %>
-
-<p>
-  <%= render "comments/form", product: @product, comment: Comment.new %>
-</p>
-
-<hr />
-<hr />
-<hr />
 
 <%= link_to 'Edit', edit_product_path(@product) %>,
 <%= link_to 'Back', products_path %>,

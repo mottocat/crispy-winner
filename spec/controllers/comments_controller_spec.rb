@@ -24,7 +24,12 @@ RSpec.describe CommentsController, type: :controller do
   # Comment. As you add validations to Comment, be sure to
   # adjust the attributes here as well.
   let(:product) { create :product  }
-  let!(:comment) { create :comment, product: product }
+  let(:author) { create :user  }
+  let!(:comment) { create :comment, product: product, author: author }
+
+  before do
+    sign_in author
+  end
 
   describe "GET #show" do
     it "assigns the requested comment as @comment" do
@@ -160,7 +165,7 @@ RSpec.describe CommentsController, type: :controller do
 
     it "redirects to the product" do
       delete :destroy, params: {id: comment.to_param}
-      expect(response).to redirect_to(product_url(product))
+      expect(response).to redirect_to(product_comments_url(product))
     end
     
     it "flashes the success message" do

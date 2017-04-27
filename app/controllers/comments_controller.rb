@@ -13,7 +13,6 @@ class CommentsController < ApplicationController
   end
   
   def index
-    @comments = @product.comments
   end
 
   # POST /comments
@@ -21,6 +20,7 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params).tap do |c|
       c.product = @product
+      c.author = current_user
     end
 
     respond_to do |format|
@@ -54,7 +54,10 @@ class CommentsController < ApplicationController
     product = @comment.product
     @comment.destroy
     respond_to do |format|
-      format.html { redirect_to product, notice: 'Comment was successfully destroyed.' }
+      format.html {
+        redirect_to product_comments_path(product),
+          notice: 'Comment was successfully destroyed.'
+        }
       format.json { head :no_content }
     end
   end

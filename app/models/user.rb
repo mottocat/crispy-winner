@@ -7,6 +7,7 @@ class User < ApplicationRecord
   # Associatons
   has_many :usage_manifests
   has_many :products, through: :usage_manifests
+  has_many :comments, foreign_key: 'author_id'
 
   def usage_manifest_for product
     usage_manifests.find_by(product: product)
