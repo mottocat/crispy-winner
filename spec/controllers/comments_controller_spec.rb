@@ -30,7 +30,7 @@ RSpec.describe CommentsController, type: :controller do
   before do
     sign_in author
   end
-  
+
   describe "GET #show" do
     it "assigns the requested comment as @comment" do
       get :show, params: {id: comment.to_param}
@@ -165,7 +165,7 @@ RSpec.describe CommentsController, type: :controller do
 
     it "redirects to the product" do
       delete :destroy, params: {id: comment.to_param}
-      expect(response).to redirect_to(product_url(product))
+      expect(response).to redirect_to(product_comments_url(product))
     end
     
     it "flashes the success message" do
