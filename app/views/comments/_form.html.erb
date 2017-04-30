@@ -11,12 +11,13 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :body %>
-    <%= f.text_area :body %>
+  <div class="fl w-25">
+    YOU
   </div>
 
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="fl w-75">
+      <%= f.text_field :body, class: "w-100 bn", placeholder: "Add a comment..." %>
+      <%= f.submit nil, class: "dn" %>
   </div>
 <% end %>

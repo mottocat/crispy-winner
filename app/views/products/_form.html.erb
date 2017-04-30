@@ -1,24 +1,43 @@
 <%= form_for(product) do |f| %>
   <% if product.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+    <div class="pa4 bg-light-red mb3 mb4-ns">
+      <div class="flex items-center justify-center">
+
+      
+        <svg class="w1" data-icon="info" viewBox="0 0 32 32" style="fill:currentcolor">
+          <title>info icon</title>
+          <path d="M16 0 A16 16 0 0 1 16 32 A16 16 0 0 1 16 0 M19 15 L13 15 L13 26 L19 26 z M16 6 A3 3 0 0 0 16 12 A3 3 0 0 0 16 6"></path>
+        </svg>
+        <span class="lh-title ml3">
+          <%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:
+        </span>
+
+      </div>
 
       <ul>
-      <% product.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% product.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
+
     </div>
+
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+  <div class="pv2 bb b--black-05">
+    <%= f.label :name,
+                class: 'db b mb2' %>
+
+    <%= f.text_field  :name,
+                      class: 'db border-box hover-black w-100 ba b--black-20 pa2 br2 mb2' %>
   </div>
 
-  <div class="field">
-    <%= f.label :brand %>
-    <%= f.text_field :brand %>
+  <div class="pv2 bb b--black-05">
+    <%= f.label :brand,
+                class: 'db b mb2' %>
+
+    <%= f.text_field  :brand,
+                      class: 'db border-box hover-black w-100 ba b--black-20 pa2 br2 mb2' %>
   </div>
 
   <div class="actions">

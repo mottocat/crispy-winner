@@ -1,27 +1,11 @@
 <%= render "products/product_header" %>
 
-<hr />
-<hr />
-<hr />
-<h2>Comments (<%= @product.comments.count %>)</h2>
-<hr />
+<%= render "products/product_nav" %>
 
+<h2 class="normal f4">Comments (<%= @product.comments.count %>)</h2>
   
-<% @product.comments.each do |comment| %>
-  <%= comment.author.try(:email) %>
-  <%= comment.body %>
-  <%= comment.created_at %>
-  <%= link_to 'Show', comment %>
-  <%= link_to 'Edit', edit_comment_path(comment) %>
-  <%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %>
-  <hr />
-<% end %>
+<%= render @product.comments %>
 
-<p>
+<div class="pv3 cf mb">
   <%= render 'comments/form', comment: (@comment or Comment.new), product: @product %>
-</p>
-
-<hr />
-<hr />
-<hr />
-
+</div>

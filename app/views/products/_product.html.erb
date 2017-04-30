@@ -1,0 +1,20 @@
+<div class="pv3 bb b--black-05">
+
+  <%= link_to product.brand + ' ' + product.name,
+              product_comments_path(product),
+              class: 'link black b'  %>
+
+  <div class="fr">
+    <%= link_to '#',
+                product_comments_path(product),
+                class: 'link silver f7 dib ml2'   %>
+    <%= link_to 'Edit',
+                edit_product_path(product),
+                class: 'link silver f7 dib ml2' %>
+    <%= link_to 'x',
+                product, 
+                method: :delete,
+                data: { confirm: 'Are you sure?' },
+                class: 'link silver f7 dib ml2' %>
+  </div>
+</div>

@@ -1,49 +1,62 @@
-<br />
+<h1 class="f3 b tc">
+  <%= @product.brand %>
+  <%= @product.name %>
+  <%= link_to 'Edit',
+              edit_product_path(@product),
+              class: 'link f6 silver' %>
+</h1>
 
-<hr />
-<hr />
-<hr />
-<h1><%= @product.brand %> <%= @product.name %></h1>
+<div class="tc">
+  <span class="dib mr3">
+    <span class="b"><%= @product.usage_manifests.with_status(:using).count %></span>
+    using
+  </span>
 
+  <span class="dib mr3">
+    <span class="b"><%= @product.usage_manifests.with_status(:used).count %></span>
+    used
+  </span>
 
+  <div class="dib mr3">
+    <% if user_signed_in? && (um = current_user.usage_manifest_for(@product)) %>
+      
+      <%=  humanize_status_for um.status %> 
+
+      <%= link_to "Cancel",
+                  [@product, :usage_manifests],
+                  method: :delete,
+                  class: 'link ttu f7 blue' %>
+
+    <% else %>
+
+      <%= form_for [@product, UsageManifest.find_or_initialize_by(product: @product, user: current_user)] do |f| %>
+            
+        <%= f.select :status, 
+                      # UsageManifest.statuses.keys,
+                      [[humanize_status_for("using"), "using"],
+                       [humanize_status_for("used"), "used"]],
+                      include_blank: true %>
+
+        <% if user_signed_in? %>
+          <%= f.submit "Save" %>
+        <% else %>
+          <%= f.submit "Save", disabled: true %>      
+          You must login
+        <% end %>
+
+      <% end %>
+
+    <% end %>
+  </div>
+
+</div>
+
+<!-- 
 <%= @product.usage_manifests.with_status(:using).count %> users using this product now,
 <br>
 
 <%= @product.usage_manifests.with_status(:used).count %> users used this product before.
+ -->
 
-<br />
-<% if user_signed_in? && (um = current_user.usage_manifest_for(@product)) %>
-  
-  <%=  humanize_status_for um.status %> 
-
-  <%= link_to "Cancel",
-              [@product, :usage_manifests],
-              method: :delete %>
-
-<% else %>
-
-  <%= form_for [@product, UsageManifest.find_or_initialize_by(product: @product, user: current_user)] do |f| %>
-        
-    <%= f.select :status, 
-                  # UsageManifest.statuses.keys,
-                  [[humanize_status_for("using"), "using"],
-                   [humanize_status_for("used"), "used"]],
-                  include_blank: true %>
-
-    <% if user_signed_in? %>
-      <%= f.submit "Save" %>
-    <% else %>
-      <%= f.submit "Save", disabled: true %>      
-      You must login
-    <% end %>
-
-  <% end %>
-
-<% end %>
-
-<br />
-<br />
-
-TABS: <%= link_to_unless current_page?(product_comments_path(@product)),
-            "Comments",
-            product_comments_path(@product) %>
+<div class="tc mt3">
+</div>

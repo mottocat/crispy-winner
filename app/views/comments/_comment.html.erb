@@ -1,0 +1,34 @@
+<div class="pv3 cf bb b--black-05 lh-copy">
+
+  <div class="fl w-25 b">
+    <%= comment.author.try(:email) %>
+  </div>
+
+  <div class="fl w-75">
+    <div class="f7 fr silver">
+      <%= link_to '#',
+                  comment,
+                  class: 'link black dib ml1' %>
+
+      <%= link_to 'Edit',
+                  edit_comment_path(comment),
+                  class: 'link black dib ml1' %>
+
+      <%= link_to 'x',
+                  comment,
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' },
+                  class: 'link black dib ml1' %>
+    </div>
+
+    <div class="near-black">
+      <%= comment.body %>
+      <date class="silver">
+        <%= time_ago_in_words comment.created_at %> ago
+      </date>
+    </div>
+
+    
+  </div>
+  
+</div>
