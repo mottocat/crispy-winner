@@ -10,15 +10,17 @@
                   comment,
                   class: 'link black dib ml1' %>
 
-      <%= link_to 'Edit',
-                  edit_comment_path(comment),
-                  class: 'link black dib ml1' %>
+      <% if policy(comment).update? %>
+        <%= link_to 'Edit',
+                    edit_comment_path(comment),
+                    class: 'link black dib ml1' %>
 
-      <%= link_to 'x',
-                  comment,
-                  method: :delete,
-                  data: { confirm: 'Are you sure?' },
-                  class: 'link black dib ml1' %>
+        <%= link_to 'x',
+                    comment,
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' },
+                    class: 'link black dib ml1' %>
+      <% end %>
     </div>
 
     <div class="near-black">

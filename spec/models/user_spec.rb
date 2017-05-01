@@ -21,7 +21,6 @@ RSpec.describe User, type: :model do
     expect(subject.full_name).to eq("Firstname Lastname")
   end
 
-
   it "#use!" do
     manifest = user.use! product, status: :using
     expect(manifest).to be_using
@@ -45,6 +44,18 @@ RSpec.describe User, type: :model do
 
     manifest = user.use! product, status: :used
     expect(user.usage_status(product)).to eq("used")
+  end
+
+  it "#has_comment_on?" do
+    allow(user).to receive_message_chain(:comments, :find_by).
+                      with(product: product).
+                      and_return(true)
+    expect(user.has_comment_on? product).to be true
+  end
+
+  it "#comment_owner?" do
+    comment = double author: user
+    expect(user.comment_owner? comment).to be true
   end
 
 end

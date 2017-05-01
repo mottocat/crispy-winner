@@ -24,6 +24,7 @@ RSpec.describe CommentsController, type: :controller do
   # Comment. As you add validations to Comment, be sure to
   # adjust the attributes here as well.
   let(:product) { create :product  }
+  let(:other_product) { create :product  }
   let(:author) { create :user  }
   let!(:comment) { create :comment, product: product, author: author }
 
@@ -49,19 +50,19 @@ RSpec.describe CommentsController, type: :controller do
     context "with valid params" do
       it "creates a new Comment" do
         expect {
-          post :create, params: {product_id: product.id, comment: attributes_for(:comment)}
-        }.to change{ product.comments.count }.by(1)
+          post :create, params: {product_id: other_product.id, comment: attributes_for(:comment)}
+        }.to change{ other_product.comments.count }.by(1)
       end
 
       it "assigns a newly created comment as @comment" do
-        post :create, params: {product_id: product.id, comment: attributes_for(:comment)}
+        post :create, params: {product_id: other_product.id, comment: attributes_for(:comment)}
         expect(assigns(:comment)).to be_a(Comment)
         expect(assigns(:comment)).to be_persisted
       end
       
       it "flashes the success message" do
         put :create, params: {
-          product_id: product.to_param,
+          product_id: other_product.to_param,
           comment: attributes_for(:comment)
         }
         expect(flash[:notice]).to eq("Comment was successfully created.")
@@ -70,7 +71,7 @@ RSpec.describe CommentsController, type: :controller do
       it "redirects to the created comment" do
         post :create, params: {
           comment: attributes_for(:comment),
-          product_id: product.id
+          product_id: other_product.id
         }
         expect(response).to redirect_to(product_comments_path(assigns(:comment).product))
       end
@@ -79,7 +80,7 @@ RSpec.describe CommentsController, type: :controller do
     context "with invalid params" do
       it "assigns a newly created but unsaved comment as @comment" do
         post :create, params: {
-          product_id: product.id,
+          product_id: other_product.id,
           comment: attributes_for(:comment, body: nil)
         }
         expect(assigns(:comment)).to be_a_new(Comment)
@@ -87,7 +88,7 @@ RSpec.describe CommentsController, type: :controller do
 
       it "re-renders the 'new' template" do
         post :create, params: {
-          product_id: product.to_param,
+          product_id: other_product.to_param,
           comment: attributes_for(:comment, body: nil)
         }
         expect(response).to render_template("comments/index")
@@ -100,7 +101,7 @@ RSpec.describe CommentsController, type: :controller do
       it "updates the requested comment" do
         put :update, params: {
           id: comment.to_param,
-          product_id: product.to_param,
+          product_id: other_product.to_param,
           comment: attributes_for(:comment, body: "a new body")
         }
         comment.reload
@@ -110,7 +111,7 @@ RSpec.describe CommentsController, type: :controller do
       it "assigns the requested comment as @comment" do
         put :update, params: {
           id: comment.to_param,
-          product_id: product.to_param,
+          product_id: other_product.to_param,
           comment: attributes_for(:comment)
         }
         expect(assigns(:comment)).to eq(comment)
@@ -118,7 +119,7 @@ RSpec.describe CommentsController, type: :controller do
 
       it "redirects to the comment" do
         put :update, params: {
-          product_id: product.to_param,
+          product_id: other_product.to_param,
           id: comment.to_param,
           comment: attributes_for(:comment)
         }
@@ -127,7 +128,7 @@ RSpec.describe CommentsController, type: :controller do
       
       it "flashes the success message" do
         put :update, params: {
-          product_id: product.to_param,
+          product_id: other_product.to_param,
           id: comment.to_param,
           comment: attributes_for(:comment)
         }

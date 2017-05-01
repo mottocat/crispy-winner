@@ -29,4 +29,12 @@ class User < ApplicationRecord
       manifest.update(status: status)
     end
   end
+
+  def has_comment_on? product
+    comments.find_by(product: product)
+  end
+
+  def comment_owner? comment
+    self == comment.author
+  end
 end
