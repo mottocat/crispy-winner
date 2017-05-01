@@ -6,10 +6,12 @@ class CommentsController < ApplicationController
   # GET /comments/1
   # GET /comments/1.json
   def show
+    authorize @comment
   end
 
   # GET /comments/1/edit
   def edit
+    authorize @comment
   end
   
   def index
@@ -22,6 +24,8 @@ class CommentsController < ApplicationController
       c.product = @product
       c.author = current_user
     end
+
+    authorize @comment
 
     respond_to do |format|
       if @comment.save
@@ -37,6 +41,8 @@ class CommentsController < ApplicationController
   # PATCH/PUT /comments/1
   # PATCH/PUT /comments/1.json
   def update
+    authorize @comment
+
     respond_to do |format|
       if @comment.update(comment_params)
         format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }
@@ -51,6 +57,7 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   # DELETE /comments/1.json
   def destroy
+    authorize @comment
     product = @comment.product
     @comment.destroy
     respond_to do |format|
