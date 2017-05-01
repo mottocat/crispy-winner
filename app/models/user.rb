@@ -9,6 +9,13 @@ class User < ApplicationRecord
   has_many :products, through: :usage_manifests
   has_many :comments, foreign_key: 'author_id'
 
+  # Validations
+  validates_presence_of :first_name, :last_name
+
+  def full_name
+    [first_name, last_name].join(" ")
+  end
+
   def usage_manifest_for product
     usage_manifests.find_by(product: product)
   end
