@@ -3,12 +3,24 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
 
+  <div class="mb4 cf">
+    <%= f.label :name,
+                class: 'db mb2 b' %>
+    <%= f.text_field :first_name,
+                      autofocus: true,
+                      placeholder: "First name",
+                      class: 'dib fl w-50 border-box bt bb bl br-0 b--black-20 br2 br--left pa2' %>
+
+    <%= f.text_field :last_name,
+                      placeholder: "Last name",
+                      class: 'dib fl w-50 border-box ba br2 br--right b--black-20 pa2' %>
+  </div>
+
   <div class="mb4">
     <%= f.label :email,
                 class: 'b db mb2' %>
 
     <%= f.email_field :email, 
-                      autofocus: true,
                       class: 'db border-box hover-black w-100 pa2' %>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
