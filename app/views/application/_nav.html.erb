@@ -3,7 +3,7 @@
 
   <div class="dtc v-mid w-75 tr">
     <% if user_signed_in? %>
-      <span class="black-50 ml3">Welcome <%= current_user.email %></span> 
+      <span class="black-50 ml3">Welcome <%= current_user.first_name %></span> 
 
       <%= link_to 'Edit User',
                     edit_user_registration_path,

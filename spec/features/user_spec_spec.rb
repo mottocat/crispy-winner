@@ -11,7 +11,7 @@ RSpec.describe "User", type: :feature do
     end
   end
 
-  let!(:user) { create :user, email: "name@example.org" }
+  let!(:user) { create :user, email: "name@example.org", first_name: "Crispy" }
 
   scenario "registration creates a new user" do
     visit "users/sign_up"
@@ -28,19 +28,19 @@ RSpec.describe "User", type: :feature do
   describe "session" do
     scenario "doesn't log in the user with invalid email" do
       login_with "invalidemail@example.org"
-      expect(page).to_not have_content "Welcome invalidemail@example.org"
+      expect(page).to_not have_content "Welcome Cripsy"
       expect(page).to_not have_content "Sign out"
     end
 
     scenario "logs in the user" do
       login_with "name@example.org"
-      expect(page).to have_content "Welcome name@example.org"
+      expect(page).to have_content "Welcome Crispy"
     end
 
     scenario "log out the user" do
       login_with "name@example.org"
       click_on "Sign out"
-      expect(page).to_not have_content "Welcome name@example.org"
+      expect(page).to_not have_content "Welcome Crispy"
     end
   end
 
