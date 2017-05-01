@@ -8,13 +8,20 @@
     <%= link_to '#',
                 product_comments_path(product),
                 class: 'link silver f7 dib ml2'   %>
-    <%= link_to 'Edit',
-                edit_product_path(product),
-                class: 'link silver f7 dib ml2' %>
-    <%= link_to 'x',
+
+    <% if policy(product).edit? %>
+      <%= link_to 'Edit',
+                  edit_product_path(product),
+                  class: 'link silver f7 dib ml2' %>
+    <% end %>
+
+    
+    <% if policy(product).destroy? %>
+      <%= link_to 'x',
                 product, 
                 method: :delete,
                 data: { confirm: 'Are you sure?' },
                 class: 'link silver f7 dib ml2' %>
+    <% end %>
   </div>
 </div>
