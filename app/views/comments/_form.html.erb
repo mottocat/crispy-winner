@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="fl w-25 b">
-    <%= current_user.full_name %>
+    <%= current_user.try(:full_name) || "YOU" %>
   </div>
 
 

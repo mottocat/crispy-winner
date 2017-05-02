@@ -5,7 +5,7 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def create?
-    !current_user.has_comment_on? record.product
+    current_user && !current_user.has_comment_on?(record.product)
   end
 
   def edit?
@@ -13,7 +13,7 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def update?
-    current_user.comment_owner? record
+    current_user && current_user.comment_owner?(record)
   end
 
   def destroy?
