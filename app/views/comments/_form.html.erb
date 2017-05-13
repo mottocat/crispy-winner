@@ -1,4 +1,6 @@
-<%= form_for([product, comment]) do |f| %>
+<% path_for_form = comment.persisted? ? comment : [product, comment] %>
+
+<%= form_for(path_for_form) do |f| %>
   <% if comment.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
@@ -15,9 +17,35 @@
     <%= current_user.try(:full_name) || "YOU" %>
   </div>
 
-
   <div class="fl w-75">
+    <% if policy(comment).edit? or policy(comment).new? %>
       <%= f.text_field :body, class: "w-100 bn", placeholder: "Add a comment..." %>
       <%= f.submit nil, class: "dn" %>
+    <% elsif current_user %>
+      <div>
+        <p class="ma0 bg-white w-100 bn">
+          <%= current_user.comment_on(product).body %>
+          <%= link_to "[edit]", 
+              edit_comment_path(product.comments.find_by(author: current_user)),
+              class: "link blue" %>
+          <%= link_to "x", 
+              product.comments.find_by(author: current_user),
+              method: :delete,
+              data: { confirm: 'Are you sure?' },
+              class: "link blue" %>
+        </p>
+      </div>
+
+    <% else %>
+      <div>
+        <p class="ma0 bg-white silver w-100 bn">
+          You must sign in for add a comment.
+          <%= link_to "[Signin]", 
+              new_user_session_path,
+              class: "link blue" %>
+        </p>
+      </div>
+
+    <% end %>
   </div>
 <% end %>

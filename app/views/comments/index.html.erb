@@ -6,6 +6,8 @@
   
 <%= render @product.comments %>
 
-<div class="pv3 cf mb">
-  <%= render 'comments/form', comment: (@comment or Comment.new), product: @product %>
+<div class="pv3 cf mb bt b--black-10">
+  <%= render 'form',
+              comment: (@comment or @product.comments.new),
+              product: @product %>
 </div>

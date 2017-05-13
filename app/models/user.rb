@@ -31,6 +31,10 @@ class User < ApplicationRecord
   end
 
   def has_comment_on? product
+    !!comment_on(product)
+  end
+
+  def comment_on product
     comments.find_by(product: product)
   end
 

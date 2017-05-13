@@ -46,11 +46,18 @@ RSpec.describe User, type: :model do
     expect(user.usage_status(product)).to eq("used")
   end
 
-  it "#has_comment_on?" do
+  it "#comment_on" do
     allow(user).to receive_message_chain(:comments, :find_by).
                       with(product: product).
                       and_return(true)
     expect(user.has_comment_on? product).to be true
+  end
+
+  it "#has_comment_on?" do
+    allow(user).to receive(:comment_on).
+                      with(product).
+                      and_return(double)
+    expect(user.has_comment_on? product).to eq(true)
   end
 
   it "#comment_owner?" do
