@@ -23,7 +23,7 @@
       <%= f.submit nil, class: "dn" %>
     <% elsif current_user %>
       <div>
-        <p class="ma0 bg-white w-100 bn">
+        <p class="ma0 bg-white w-100 bn lh-copy">
           <%= current_user.comment_on(product).body %>
           <%= link_to "[edit]", 
               edit_comment_path(product.comments.find_by(author: current_user)),
