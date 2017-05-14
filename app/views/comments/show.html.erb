@@ -1,13 +1,7 @@
-<p id="notice"><%= notice %></p>
+<div class="mb3 pb2 bb b--black-10">
+  <%= link_to "&larr; Back to Comments".html_safe,
+        product_comments_path(@comment.product),
+        class: "link blue" %>
+</div>
 
-<p>
-  <strong>Body:</strong>
-  <%= @comment.body %>
-</p>
-
-<p>
-  <strong>Product:</strong>
-  <%= @comment.product.name %>
-</p>
-
-<%= link_to 'Edit', edit_comment_path(@comment) %> |
+<%= render "comment", comment: @comment %>

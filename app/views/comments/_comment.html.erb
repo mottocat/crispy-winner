@@ -1,34 +1,29 @@
-<div class="pv3 cf bb b--black-05 lh-copy">
+<div class="pv3 cf bb b--black-05 lh-copy"
+      id="<%= dom_id(comment) %>">
 
   <div class="fl w-25 b">
     <%= comment.author.full_name %>
   </div>
 
   <div class="fl w-75">
-    <div class="f7 fr silver">
-      <%= link_to '#',
-                  comment,
-                  class: 'link black dib ml1' %>
-
+      <%= comment.body %>
+      <date>
+        <%= link_to comment, class: "link blue dib ml1" do %>
+          <%= time_ago_in_words comment.created_at %> ago
+        <% end %>
+      </date>
+      
       <% if policy(comment).update? %>
-        <%= link_to 'Edit',
+        <%= link_to '[edit]',
                     edit_comment_path(comment),
-                    class: 'link black dib ml1' %>
+                    class: 'link blue dib ml1' %>
 
-        <%= link_to 'x',
+        <%= link_to '&times;'.html_safe,
                     comment,
                     method: :delete,
                     data: { confirm: 'Are you sure?' },
-                    class: 'link black dib ml1' %>
+                    class: 'link blue dib ml1' %>
       <% end %>
-    </div>
-
-    <div class="near-black">
-      <%= comment.body %>
-      <date class="silver">
-        <%= time_ago_in_words comment.created_at %> ago
-      </date>
-    </div>
 
     
   </div>

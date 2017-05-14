@@ -19,16 +19,21 @@
 
   <div class="fl w-75">
     <% if policy(comment).edit? or policy(comment).new? %>
-      <%= f.text_field :body, class: "w-100 bn", placeholder: "Add a comment..." %>
-      <%= f.submit nil, class: "dn" %>
+      <%= f.text_area :body, rows: 4, class: "w-100", placeholder: "Add a comment..." %>
+      <%= f.submit "Save", class: "fr dib" %>
     <% elsif current_user %>
-      <div>
+      <div id="<%= dom_id(current_user.comment_on(product)) %>">
         <p class="ma0 bg-white w-100 bn lh-copy">
           <%= current_user.comment_on(product).body %>
-          <%= link_to "[edit]", 
+          <date>
+            <%= link_to current_user.comment_on(product), class: "link blue dib ml1" do %>
+              <%= time_ago_in_words current_user.comment_on(product).created_at %> ago
+            <% end %>
+          </date>
+          <%= link_to "[edit]",
               edit_comment_path(product.comments.find_by(author: current_user)),
               class: "link blue" %>
-          <%= link_to "x", 
+          <%= link_to "&times;".html_safe, 
               product.comments.find_by(author: current_user),
               method: :delete,
               data: { confirm: 'Are you sure?' },

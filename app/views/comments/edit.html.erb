@@ -1,6 +1,7 @@
-<h1>Editing Comment</h1>
+<h1 class="f4 bb b--black-20 pb2 mb3 tc">Editing Comment</h1>
 
 <%= render 'form', comment: @comment, product: @comment.product %>
 
-<%= link_to 'Show', @comment %> |
-<%= link_to 'Back', @comment.product %>
+<%= link_to '&larr; Back'.html_safe,
+      product_comments_path(@comment.product),
+      class: "link dib mt5 blue" %>

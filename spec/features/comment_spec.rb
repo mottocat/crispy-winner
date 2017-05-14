@@ -8,10 +8,12 @@ RSpec.describe "Comment", type: :feature do
     login user
     visit product_comments_path(product)
     expect {
-      fill_in "comment_body",
-        with: "My comment is about that you have never seen before." 
-      page.execute_script("$('#new_comment').submit()")
-      find_link("[edit]")
+      within "#new_comment" do
+        fill_in "comment_body",
+          with: "My comment is about that you have never seen before." 
+        click_button "Save"
+      end 
+      all("a")
     }.to change { product.comments.count }.by(1)
   end
 
@@ -34,7 +36,7 @@ RSpec.describe "Comment", type: :feature do
 
     handle_js_confirm do
       within "#new_comment" do
-        click_link "x"
+        click_link "×"
       end
     end
 
@@ -53,8 +55,7 @@ RSpec.describe "Comment", type: :feature do
     end
 
     fill_in "comment_body", with: "This comment is edited by owner"
-    page.execute_script("$('.edit_comment').submit()")
-
+    click_button "Save"
 
     visit product_comments_path(product)
     expect(page).to_not have_content("This comment is going to edited")
