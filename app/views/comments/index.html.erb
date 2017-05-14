@@ -2,12 +2,12 @@
 
 <%= render "products/product_nav" %>
 
-<h2 class="normal f6 tr">COMMENTS (<%= @product.comments.count %>)</h2>
+<h2 class="normal f6 tr mb2 pb2 bb b--black-10">COMMENTS (<%= @product.comments.count %>)</h2>
   
 <%= render @product.comments %>
 
 <div class="pv3 cf mb bt b--black-10">
-<h2 class="normal f6 tr">YOUR COMMENT</h2>
+<h2 class="normal f6 tr mb2 pb2 bb b--black-10">YOUR COMMENT</h2>
   <%= render 'form',
               comment: (@comment or @product.comments.new),
               product: @product %>

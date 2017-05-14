@@ -1,4 +1,9 @@
-<h1 class="f4 bb b--black-20 pb2 mb3 tc">Editing Comment</h1>
+<% @product = @comment.product %>
+
+<%= render "products/product_header" %>
+<%= render "products/product_nav" %>
+
+<h1 class="normal f6 tr mb2 pb2 bb b--black-10">YOUR COMMENT</h1>
 
 <%= render 'form', comment: @comment, product: @comment.product %>
 
