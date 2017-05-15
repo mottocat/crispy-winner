@@ -1,21 +1,17 @@
-<div class="pv3 bb b--black-05">
-
-  <%= link_to product.brand + ' ' + product.name,
-              product_comments_path(product),
-              class: 'link black b'  %>
-
-  <div class="fr">
-    <%= link_to '#',
-                product_comments_path(product),
-                class: 'link silver f7 dib ml2'   %>
-
+<%= link_to product_comments_path(product),
+      class: 'db pv3 bb b--black-10 black cf hover-bg-light-yellow' do %>
+   
+  <div class="fl w-80">
+    <span class="b">
+      <%= product.brand + ' ' + product.name %>
+    </span>
+    
     <% if policy(product).edit? %>
       <%= link_to 'Edit',
                   edit_product_path(product),
                   class: 'link silver f7 dib ml2' %>
     <% end %>
 
-    
     <% if policy(product).destroy? %>
       <%= link_to 'x',
                 product, 
@@ -24,4 +20,13 @@
                 class: 'link silver f7 dib ml2' %>
     <% end %>
   </div>
-</div>
+
+  <div class="fl w-10 tr">
+    <%= product.usage_manifests.with_status(:used).count %> used
+  </div>
+
+  <div class="fl w-10 tr">
+    <%= product.usage_manifests.with_status(:using).count %> using
+  </div>
+
+<% end %>
