@@ -55,7 +55,9 @@ RSpec.describe "Comment", type: :feature do
     end
 
     fill_in "comment_body", with: "This comment is edited by owner"
-    click_button "Save"
+    within ".edit_comment" do
+      click_button "Save"
+    end
 
     visit product_comments_path(product)
     expect(page).to_not have_content("This comment is going to edited")
