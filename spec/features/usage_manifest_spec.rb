@@ -36,6 +36,8 @@ RSpec.describe "Usage Manifest", type: :feature do
 
   it "shows total used or using users" do
     user.use! product, status: :using
+    usage_manifest = user.usage_manifest_for(product)
+    usage_manifest.update! approved_image: create(:approval_image, user: user, product: product)
     visit product_path(product)
     expect(page).to have_content("1 using")
 

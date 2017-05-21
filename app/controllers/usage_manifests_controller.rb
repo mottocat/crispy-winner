@@ -1,4 +1,3 @@
-require "pry"
 class UsageManifestsController < ApplicationController
   before_action :set_product
   before_action :set_usage_manifest

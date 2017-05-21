@@ -21,6 +21,14 @@ FactoryGirl.define do
     user
     product
     status :using
+    approved_image
+  end
+
+  factory :approval_image, aliases: [:approved_image] do
+    user
+    product
+    status :waiting_approval
+    image Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'images', 'products', 'product1.jpg'))
   end
 
   factory :product_usage do

@@ -13,6 +13,9 @@
 
     <%= render 'nav' %>
     <%= render 'messages' %>
+
+    <%= yield :messages %>
+
     <section class="center mw7 pa3 ph5-ns pt5-ns">
       <%= yield %>
     </section>

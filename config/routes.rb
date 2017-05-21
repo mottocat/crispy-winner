@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   resources :products do
     resources :comments, shallow: true
     resource :usage_manifests, only: [:create, :destroy]
+    resources :approval_images
   end
 
   resources :product_usages
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

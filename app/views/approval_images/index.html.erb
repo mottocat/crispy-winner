@@ -1,0 +1,42 @@
+<%= render "products/approval_usage_manifest", product: @product %>
+
+<%= render "products/product_header", product: @product %>
+
+<%= render "products/product_nav" %>
+
+<h2 class="normal f6 tr mb2 pb2 bb b--black-10">THE USERS' IMAGES FOR APPROVAL</h2>
+  
+<% ApprovalImage.where(product: @product, status: :waiting_approval).each do |ai| %>
+  <div class="pv3 cf mb bt b--black-10">
+    <div class="fl w-25 pa2">
+      <%= image_tag ai.image %>
+    </div>
+
+    <div class="fr w-15 pa2">
+      <%= form_for [@product, ai] do |f| %>
+        <%= f.hidden_field :status, value: "approved" %>
+        <%= f.submit "Approve" %>
+      <% end %>
+    </div>
+
+    <div class="fr w-15 pa2">
+      <%= form_for [@product, ai] do |f| %>
+        <%= f.hidden_field :status, value: "denied" %>
+        <%= f.submit "Deny" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<h2 class="normal f6 tr mb2 pb2 bb b--black-10">APPROVED IMAGES</h2>
+  
+<% ApprovalImage.where(product: @product, status: :approved).each do |ai| %>
+  <div class="cf pv3 mb2 bb b--black-10">
+    <div class="fl w-25 pa2">
+      <%= image_tag ai.image %>
+    </div>
+    <div class="fl w-25 pa2">
+      <%= ai.user.full_name %>
+    </div>
+  </div>
+<% end %>
