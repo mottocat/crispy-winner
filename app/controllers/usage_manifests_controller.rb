@@ -5,12 +5,12 @@ class UsageManifestsController < ApplicationController
 
   def create
     @usage_manifest.update(usage_manifest_params)
-    redirect_to @product
+    redirect_to stored_location_for(:user) || @product
   end
 
   def destroy
     @usage_manifest.destroy
-    redirect_to @product
+    redirect_to stored_location_for(:user) || @product
   end
 
   private
