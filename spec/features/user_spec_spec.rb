@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "User", type: :feature do
 
   def login_with email, password = "secret"
-    visit "users/sign_in"
+    visit "/users/sign_in"
     within "form#new_user" do
       fill_in "user_email", with: email
       fill_in "user_password", with: password
@@ -42,6 +42,24 @@ RSpec.describe "User", type: :feature do
       click_on "Sign out"
       expect(page).to_not have_content "Welcome Crispy"
     end
+
+    scenario "after signed in redirects to current page" do
+      # For example
+      product = create :product
+      visit product_comments_path(product)
+      login_with "name@example.org"
+      expect(page.current_path).to eq(product_comments_path(product))
+    end
+
+    scenario "after sign out redirects to current page" do
+      # For example
+      product = create :product
+      visit product_comments_path(product)
+      login_with "name@example.org"
+      expect(page.current_path).to eq(product_comments_path(product))
+      click_on "Sign out"
+      expect(page.current_path).to eq(product_comments_path(product))
+    end
   end
 
   describe "edit" do
@@ -73,7 +91,6 @@ RSpec.describe "User", type: :feature do
         user.reload
       }.to_not change { user.email }
     end
-
   end
 
 
