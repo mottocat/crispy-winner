@@ -1,0 +1,66 @@
+<h1 class="f3 b tc">
+  <%= @product.brand %>
+  <%= @product.name %>
+  <%= link_to 'Edit',
+              edit_product_path(@product),
+              class: 'link f6 silver' %>
+  <%= link_to 'Moderation',
+              product_approval_images_path(@product),
+              class: 'link f6 silver' %>
+
+</h1>
+
+<div class="tc">
+  <span class="dib mr3">
+    <span class="b"><%= @product.usage_manifests.with_status(:using).where.not(approved_image_id: nil).count %></span>
+    using
+  </span>
+
+  <span class="dib mr3">
+    <span class="b"><%= @product.usage_manifests.with_status(:used).count %></span>
+    used
+  </span>
+
+  <div class="dib mr3">
+    <% if user_signed_in? && (um = current_user.usage_manifest_for(@product)) %>
+      
+      <%=  humanize_status_for um.status %> 
+
+      <%= link_to "Cancel",
+                  [@product, :usage_manifests],
+                  method: :delete,
+                  class: 'link ttu f7 blue' %>
+
+    <% else %>
+
+      <%= form_for [@product, UsageManifest.find_or_initialize_by(product: @product, user: current_user)] do |f| %>
+            
+        <%= f.select :status, 
+                      # UsageManifest.statuses.keys,
+                      [[humanize_status_for("using"), "using"],
+                       [humanize_status_for("used"), "used"]],
+                      include_blank: true %>
+
+        <% if user_signed_in? %>
+          <%= f.submit "Save" %>
+        <% else %>
+          <%= f.submit "Save", disabled: true %>      
+          <span class="red">You must login</span>
+        <% end %>
+
+      <% end %>
+
+    <% end %>
+  </div>
+
+</div>
+
+<!-- 
+<%= @product.usage_manifests.with_status(:using).count %> users using this product now,
+<br>
+
+<%= @product.usage_manifests.with_status(:used).count %> users used this product before.
+ -->
+
+<div class="tc mt3">
+</div>

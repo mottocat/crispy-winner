@@ -1,4 +1,4 @@
-<% if current_user.try(:usage_manifest_for, product).try(:need_approval?) %>
+<% if current_user.try(:usage_manifest_for, @product).try(:need_approval?) %>
   <%= content_for :messages do %>
     <div class="flex items-center justify-center pa4 bg-lightest-blue">
       <svg class="w1" data-icon="info" viewBox="0 0 32 32" style="fill:currentcolor">
@@ -22,7 +22,7 @@
           <% if ai = ApprovalImage.find_by(product: @product, user: current_user) %>
             <%= image_tag ai.image, width: 64 %>
           <% end %>
-          <%= form_for [product, ApprovalImage.new] do |f| %>
+          <%= form_for [@product, ApprovalImage.new] do |f| %>
             <%= f.file_field :image %>
             <%= f.submit %>
           <% end %>
