@@ -26,7 +26,7 @@
   </div>
 
   <div class="fl w-10 tr">
-    <%= product.usage_manifests.with_status(:using).count %> using
+    <%= product.usage_manifests.with_status(:using).where.not(approved_image_id: nil).count %> using
   </div>
 
 <% end %>
