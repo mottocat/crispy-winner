@@ -12,6 +12,13 @@ RSpec.describe "User", type: :feature do
   end
 
   let!(:user) { create :user, email: "name@example.org", first_name: "Crispy" }
+  let(:product1) { create :product }
+  let(:product2) { create :product }
+
+  before do
+    create :usage_manifest, product: product1, user: user, status: :using
+    create :usage_manifest, product: product2, user: user, status: :used
+  end
 
   scenario "registration creates a new user" do
     visit "users/sign_up"
@@ -90,6 +97,24 @@ RSpec.describe "User", type: :feature do
         end
         user.reload
       }.to_not change { user.email }
+    end
+  end
+
+  describe "using & used tables" do
+    it "seems using products" do
+      visit user_path(user)
+      within "#using" do
+        expect(page).to have_content(product1.name)
+        expect(page).to_not have_content(product2.name)
+      end
+    end
+
+    it "seems used products" do
+      visit user_path(user)
+      within "#used" do
+        expect(page).to_not have_content(product1.name)
+        expect(page).to have_content(product2.name)
+      end
     end
   end
 

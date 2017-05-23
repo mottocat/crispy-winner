@@ -3,11 +3,16 @@
 
   <div class="dtc v-mid w-75 tr">
     <% if user_signed_in? %>
-      <span class="black-50 ml3">Welcome <%= current_user.first_name %></span> 
+      <span class="black-50 ml3">Welcome</span> 
 
+      <%= link_to current_user.first_name,
+                  current_user,
+                  class: 'link dim black f6 f5-ns dib ml3' %>
+ 
       <%= link_to 'Edit User',
-                    edit_user_registration_path,
-                    class: 'link dim black f6 f5-ns dib ml3' %>
+                  edit_user_registration_path,
+                  class: 'link dim black f6 f5-ns dib ml3' %>
+
       <%= link_to 'Sign out',
                   destroy_user_session_path,
                   method: :delete,

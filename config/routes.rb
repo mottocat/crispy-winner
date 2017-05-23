@@ -9,5 +9,7 @@ Rails.application.routes.draw do
     resources :approval_images
   end
 
+  resources :users, only: :show
+
   resources :product_usages
 end

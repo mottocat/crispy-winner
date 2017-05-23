@@ -2,7 +2,7 @@
       id="<%= dom_id(comment) %>">
 
   <div class="fl w-25 b">
-    <%= comment.author.full_name %>
+    <%= link_to comment.author.full_name, comment.author, class: "link black" %>
     <% if comment.author.usage_manifest_for(comment.product).try(:approved_image_id) %>
       <span class="dib br-100 tc bg-green white" style="width: 1.3rem; line-height: 1.3rem">&#x2713;</span>
     <% end %>

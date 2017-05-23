@@ -5,7 +5,7 @@ FactoryGirl.define do
   end
   
   factory :product do
-    name Faker::Name.title
+    name { Faker::Name.title }
     brand Faker::Company.name
   end
 
