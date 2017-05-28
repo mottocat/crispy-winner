@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe ApprovalImagesController, type: :controller do
 
   let(:user) { create :user }
+  let(:admin) { create :admin }
   let!(:product) { create :product }
 
   before do
@@ -10,6 +11,7 @@ RSpec.describe ApprovalImagesController, type: :controller do
   end
 
   it "#index" do
+    sign_in admin
     get :index, params: { product_id: product.id}
     expect(response).to have_http_status(:success)
   end

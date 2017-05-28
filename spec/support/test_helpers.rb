@@ -1,6 +1,6 @@
 module TestHelpers
   def login user = create(:user)
-    visit "users/sign_in"
+    visit new_user_session_path
     within "form#new_user" do
       fill_in "user_email", with: user.email
       fill_in "user_password", with: user.password
@@ -8,6 +8,10 @@ module TestHelpers
     end
     
     user
+  end
+
+  def logout
+    click_on "Sign out"
   end
 
   def handle_js_confirm(accept=true)

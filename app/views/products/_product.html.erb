@@ -1,9 +1,10 @@
-<%= link_to product_comments_path(product),
-      class: 'db pv3 bb b--black-10 black cf hover-bg-light-yellow' do %>
+<div class='db pv3 bb b--black-10 black cf hover-bg-light-yellow'>
    
   <div class="fl w-80">
     <span class="b">
-      <%= product.brand + ' ' + product.name %>
+      <%= link_to product.brand + ' ' + product.name,
+            product_comments_path(product),
+            class: 'link black' %>
     </span>
     
     <% if policy(product).edit? %>
@@ -29,4 +30,4 @@
     <%= product.usage_manifests.with_status(:using).where.not(approved_image_id: nil).count %> using
   </div>
 
-<% end %>
+</div>

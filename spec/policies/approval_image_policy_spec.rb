@@ -4,11 +4,12 @@ RSpec.describe ApprovalImagePolicy do
   subject { described_class }
 
   let(:user) { double }
+  let(:admin) { build_stubbed :admin }
   let(:approval_image) { double }
 
   permissions :index? do
     it "grant access" do
-      expect(subject).to permit(user, approval_image) 
+      expect(subject).to permit(admin, approval_image) 
     end
   end
 

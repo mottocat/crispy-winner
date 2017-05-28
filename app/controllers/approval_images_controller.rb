@@ -1,15 +1,19 @@
 class ApprovalImagesController < ApplicationController
 
   before_action :set_product
-  before_action :set_approval_image, only: [:create, :update]
+  before_action :set_approval_image, only: [:update]
 
   def index
     authorize ApprovalImage
   end
 
   def create
+    @approval_image = ApprovalImage.new.tap do |ai|
+      ai.user = current_user
+      ai.product = @product
+      ai.status = :waiting_approval
+    end
     authorize @approval_image
-    @approval_image.status = :waiting_approval
     @approval_image.update(permitted_attributes(@approval_image))
     redirect_to @product
   end
@@ -27,8 +31,7 @@ class ApprovalImagesController < ApplicationController
   end
 
   def set_approval_image
-    @approval_image = ApprovalImage.find_or_initialize_by(
-                                user: current_user, product: @product)
+    @approval_image = ApprovalImage.find(params[:id])
   end
 
 end

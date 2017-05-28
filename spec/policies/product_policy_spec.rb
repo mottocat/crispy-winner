@@ -2,35 +2,49 @@ require 'rails_helper'
 
 RSpec.describe ProductPolicy do
   
-  subject { described_class.new(user, record) }
+  subject { described_class }
 
-  let(:user) { double }
-  let(:record) { double }
+  let(:user) { build_stubbed :user }
+  let(:product) { double }
+  let(:admin) { build_stubbed :admin }
 
-  it "#show?" do
-    expect(subject.show?).to be_truthy
+  permissions :show? do
+    it "grant access" do
+      expect(subject).to permit(user, product)
+    end
   end
 
-  it "#new?" do
-    expect(subject.new?).to be_truthy
+  permissions :new? do
+    it "grant access" do
+      expect(subject).to permit(user, product)
+    end
   end
 
-  it "#create?" do
-    allow(subject).to receive(:new?).and_return(perm = double)
-    expect(subject.create?).to eq perm
+  permissions :create? do
+    it "grant access" do
+      expect(subject).to permit(user, product)
+    end
   end
 
-  it '#edit?' do
-    expect(subject.edit?).to be_falsy
+  permissions :edit? do
+    it "grant access" do
+      expect(subject).to_not permit(user, product)
+      expect(subject).to permit(admin, product)
+    end
   end
 
-  it "#update?" do
-    allow(subject).to receive(:edit?).and_return(perm = double)
-    expect(subject.update?).to eq perm
+  permissions :update? do
+    it "grant access" do
+      expect(subject).to_not permit(user, product)
+      expect(subject).to permit(admin, product)
+    end
   end
 
-  it "#destroy?" do
-    expect(subject.destroy?).to be_falsy
+  permissions :destroy? do
+    it "grant access" do
+      expect(subject).to_not permit(user, product)
+      expect(subject).to permit(admin, product)
+    end
   end
 
 end

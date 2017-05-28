@@ -3,6 +3,7 @@ require "rails_helper"
 RSpec.describe "Approval Image", type: :feature do
   
   let!(:user) { create :user }
+  let!(:admin) { create :admin }
   let!(:product) { create :product }
   let!(:usage_manifest) { create :usage_manifest, 
     user: user,
@@ -42,7 +43,10 @@ RSpec.describe "Approval Image", type: :feature do
     it "approves the image, the using count increases" do
       visit product_comments_path(product)
       expect(page).to have_content('0 using')
-      create :approval_image, user: user, product: product
+      approval_image = create :approval_image, user: user, product: product
+      logout
+            
+      login admin
       visit product_approval_images_path(product)
       click_on "Approve"
       visit product_comments_path(product)
@@ -54,6 +58,9 @@ RSpec.describe "Approval Image", type: :feature do
       visit product_comments_path(product)
       expect(page).to have_content('0 using')
       create :approval_image, user: user, product: product
+      logout
+
+      login admin
       visit product_approval_images_path(product)
       click_on "Deny"
       visit product_comments_path(product)

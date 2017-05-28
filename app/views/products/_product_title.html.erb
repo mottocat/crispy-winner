@@ -1,12 +1,18 @@
 <h1 class="f3 b tc">
   <%= @product.brand %>
   <%= @product.name %>
-  <%= link_to '[Edit]',
-              edit_product_path(@product),
-              class: 'link f6 silver' %>
-  <%= link_to '[Moderation]',
-              product_approval_images_path(@product),
-              class: 'link f6 silver' %>
+
+  <% if policy(@product).edit? %>
+    <%= link_to '[Edit]',
+                edit_product_path(@product),
+                class: 'link f6 silver' %>
+  <% end %>
+
+  <% if policy(ApprovalImage).index? %>
+    <%= link_to '[Moderation]',
+                product_approval_images_path(@product),
+                class: 'link f6 silver' %>
+  <% end %>
 
 </h1>
 

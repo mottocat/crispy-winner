@@ -38,6 +38,7 @@ gem 'devise', '~> 4.2'
 gem 'carrierwave', '~> 1.0'
 gem 'tachyons-rails'
 gem 'pundit'
+gem 'highline'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -54,6 +55,7 @@ group :test do
   gem 'capybara'
   gem 'capybara-webkit'
   gem 'database_cleaner'
+  gem 'highline-test'
 end
 
 group :development do

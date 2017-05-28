@@ -1,8 +1,10 @@
 <h1 class="f3 tc mb3 mb4-ns bb b--black-40 pb3">
   Products (<%= Product.count %>)
-  <%= link_to '[Add new]',
-              new_product_path,
-              class: 'silver f5 link' %>
+  <% if policy(Product).new? %>
+    <%= link_to '[Add new]',
+                new_product_path,
+                class: 'silver f5 link' %>
+  <% end %>
 </h1>
 
 <%= render @products %>

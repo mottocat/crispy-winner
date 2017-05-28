@@ -1,5 +1,9 @@
 class ProductPolicy < ApplicationPolicy
 
+  def index?
+    true
+  end
+
   def show?
     true
   end
@@ -13,7 +17,7 @@ class ProductPolicy < ApplicationPolicy
   end
 
   def edit?
-    false
+    current_user.try(:admin?)
   end
 
   def update?
@@ -21,7 +25,7 @@ class ProductPolicy < ApplicationPolicy
   end
 
   def destroy?
-    false
+    current_user.try(:admin?)
   end
 
 end

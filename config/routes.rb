@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :products do
     resources :comments, shallow: true
     resource :usage_manifests, only: [:create, :destroy]
-    resources :approval_images
+    resources :approval_images, only: [:index, :create, :update]
   end
 
   resources :users, only: :show

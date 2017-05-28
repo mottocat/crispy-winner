@@ -21,6 +21,12 @@ RSpec.describe User, type: :model do
     expect(subject.full_name).to eq("Firstname Lastname")
   end
 
+  it "#admin" do
+    expect(subject).to_not be_admin
+    admin = create :admin
+    expect(admin).to be_admin
+  end
+
   it "#use!" do
     manifest = user.use! product, status: :using
     expect(manifest).to be_using

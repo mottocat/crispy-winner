@@ -1,35 +1,49 @@
 require 'rails_helper'
 
 RSpec.describe CommentPolicy do
-  subject { described_class.new(user, record) }
+  subject { described_class }
 
-  let(:user) { double }
-  let(:product) { double }
-  let(:record) { double product: product }
+  let(:user) { create :user }
+  let(:product) { create :product }
+  let(:comment) { create :comment, product: product, author: user }
 
-  it "#new?" do
-    allow(subject).to receive(:create?).and_return(perm = double)
-    expect(subject.new?).to eq perm 
+  permissions :new? do
+    it "grant access" do
+      allow(user).to receive(:has_comment_on?).and_return(false)
+      expect(subject).to permit(user, comment) 
+    end
   end
 
-  it "#create?" do
-    allow(user).to receive(:has_comment_on?).and_return(false)
-    expect(subject.create?).to eq true
+  permissions :create? do
+    it "grant access" do
+      allow(user).to receive(:has_comment_on?).and_return(false)
+      expect(subject).to permit(user, comment) 
+    end
   end
 
-  it "#update?" do
-    allow(user).to receive(:comment_owner?).with(record).and_return(true)
-    expect(subject.update?).to be true
+  permissions :update? do
+    it "grant access" do
+      allow(user).to receive(:comment_owner?).with(comment).and_return(true)
+      expect(subject).to permit(user, comment) 
+      admin = create :admin
+      expect(subject).to permit(admin, comment)
+      other_user = create :user
+      expect(subject).to_not permit(other_user, comment)
+    end
   end
 
-  it '#edit?' do
-    allow(subject).to receive(:update?).and_return(perm = double)
-    expect(subject.edit?).to eq perm
+  permissions :edit? do
+    it "grant access" do
+      allow(user).to receive(:comment_owner?).with(comment).and_return(true)
+      expect(subject).to permit(user, comment) 
+    end
   end
 
-  it "#destroy?" do
-    allow(subject).to receive(:update?).and_return(perm = double)
-    expect(subject.destroy?).to eq perm
+  permissions :destroy? do
+    it "grant access" do
+      allow(user).to receive(:comment_owner?).with(comment).and_return(true)
+      expect(subject).to permit(user, comment) 
+    end
   end
 
 end

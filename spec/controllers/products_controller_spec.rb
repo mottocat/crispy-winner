@@ -37,14 +37,10 @@ RSpec.describe ProductsController, type: :controller do
     }
   }
 
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # ProductsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
-
-  let!(:product) {
-    Product.create! valid_attributes
-  }
+  let!(:product) { Product.create! valid_attributes}
+  let(:user) { create :user }
+  let(:admin) { create :admin }
 
   describe "GET #index" do
     it "assigns all products as @products" do
@@ -62,6 +58,7 @@ RSpec.describe ProductsController, type: :controller do
 
   describe "GET #new" do
     it "assigns a new product as @product" do
+      allow(controller).to receive(:current_user).and_return(user)
       get :new
       expect(assigns(:product)).to be_a_new(Product)
     end
@@ -69,12 +66,17 @@ RSpec.describe ProductsController, type: :controller do
 
   describe "GET #edit" do
     it "assigns the requested product as @product" do
+      allow(controller).to receive(:current_user).and_return(admin)
       get :edit, params: {id: product.to_param}
       expect(assigns(:product)).to eq(product)
     end
   end
 
   describe "POST #create" do
+    before do
+      allow(controller).to receive(:current_user).and_return(admin)
+    end
+
     context "with valid params" do
       it "creates a new Product" do
         expect {
@@ -108,6 +110,10 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe "PUT #update" do
+    before do
+      allow(controller).to receive(:current_user).and_return(admin)
+    end
+
     context "with valid params" do
       let(:new_attributes) {
         {
@@ -155,6 +161,10 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe "DELETE #destroy" do
+    before do
+      allow(controller).to receive(:current_user).and_return(admin)
+    end
+
     it "flashes the notice message" do
       delete :destroy, params: {id: product.to_param}
       expect(flash[:notice]).to eq("Product was successfully destroyed.")  

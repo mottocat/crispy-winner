@@ -13,7 +13,7 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def update?
-    current_user && current_user.comment_owner?(record)
+    current_user.try(:admin) || (current_user && current_user.comment_owner?(record))
   end
 
   def destroy?
