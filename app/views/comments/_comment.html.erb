@@ -4,11 +4,15 @@
   <div class="fl w-25 b">
     <%= link_to comment.author.full_name, comment.author, class: "link black" %>
     <% if comment.author.usage_manifest_for(comment.product).try(:approved_image_id) %>
-      <span class="dib br-100 tc bg-green white" style="width: 1.3rem; line-height: 1.3rem">&#x2713;</span>
+      <span class="dib br-100 tc bg-green white" 
+            title="The user approved that is using this product" 
+            style="width: 1.3rem; line-height: 1.3rem">&#x2713;</span>
     <% end %>
 
     <% if comment.author.usage_manifest_for(comment.product).try(:used?) %>
-      <span class="dib" style="width: 1.3rem; line-height: 1.3rem">&#128273;</span>
+      <span class="dib"
+            title="The user used this product before"
+            style="width: 1.3rem; line-height: 1.3rem">&#128273;</span>
     <% end %>
   </div>
 
