@@ -7,20 +7,24 @@
       </svg>
       <span class="lh-title ml3">
 
+        You must add an photo taken by you with the product for approve
+        that you are using this product. 
+
         <% if current_user && ApprovalImage.find_by(product: @product, user: current_user).try(:denied?)  %>
           <span class="red db">The picture you sended before denied. Please send a photo again!</span>
         <% end %>
 
         <% if current_user && ApprovalImage.find_by(product: @product, user: current_user).try(:waiting_approval?)  %>
-          <span class="red db">The picture you sended is waiting for approval.</span>
+          <span class="gold db">The picture you sended is waiting for approval.</span>
         <% end %>
-
-        You must add an photo taken by you with the product for approve
-        that you are using this product. 
 
         <div>
           <% if ai = ApprovalImage.find_by(product: @product, user: current_user) %>
-            <%= image_tag ai.image, width: 64 %>
+            <% if ai.waiting_approval? %>
+              <%= image_tag ai.image, width: 64, class: "ba bw3 br3 b--gold" %>
+            <% else %>
+              <%= image_tag ai.image, width: 64, class: "ba bw3 br3 b--red" %>
+            <% end %>
           <% end %>
           <%= form_for [@product, ApprovalImage.new] do |f| %>
             <%= f.file_field :image %>
