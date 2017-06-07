@@ -17,5 +17,6 @@ Rails.application.routes.draw do
     get "/" => "base#index"
     resources :users, only: :index
     resources :products, only: :index
+    resources :comments, only: :index
   end
 end

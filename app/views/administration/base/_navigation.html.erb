@@ -10,4 +10,7 @@
                             administration_products_path,
                             class: "link dib mr3 blue" %>
 
+<%= link_to_unless_current "COMMENTS (" + Comment.count.to_s + ")",
+                            administration_comments_path,
+                            class: "link dib mr3 blue" %>
 <hr class="b--black-20 mt3" />

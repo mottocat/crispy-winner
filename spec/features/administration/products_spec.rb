@@ -1,7 +1,7 @@
 require "rails_helper"
 
 module Administration
-  RSpec.describe "Users", type: :feature do
+  RSpec.describe "Products", type: :feature do
     
     let!(:admin) { create :admin }
 
