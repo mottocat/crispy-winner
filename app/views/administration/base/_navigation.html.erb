@@ -1,1 +1,9 @@
-<%= link_to_unless_current "Dasboard", administration_path %>
+<%= link_to_unless_current "DASBOARD",
+                            administration_path,
+                            class: "link dib mr3 blue" %>
+
+<%= link_to_unless_current "USERS (" + User.count.to_s + ")",
+                            administration_users_path,
+                            class: "link dib mr3 blue" %>
+
+<hr class="b--black-20 mt3" />

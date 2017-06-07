@@ -1,6 +1,7 @@
 module Administration
   class BaseController < ApplicationController
 
+    layout "administration"
     before_action :authorize_dasboard
 
     def index
