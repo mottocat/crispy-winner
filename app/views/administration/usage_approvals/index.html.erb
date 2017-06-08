@@ -1,0 +1,67 @@
+<%= render "header" %>
+<%= render "navigation" %>
+
+<table class="mt4 w-100">
+  <thead>
+    <tr>
+      <th class="pr3 tl pv2 bb b--black-10">
+        <%= sortable "product_id" %>
+      </th>
+      <th class="pr3 tl pv2 bb b--black-10">
+        <%= sortable "user_id" %>
+      </th>
+      <th class="pr3 tl pv2 bb b--black-10">
+        User Has Comment
+      </th>
+      <th class="pr3 tl pv2 bb b--black-10">
+        <%= sortable "created_at" %>
+      </th>
+      <th class="pr3 tl pv2 bb b--black-10">
+        <%= sortable "updated_at" %>
+      </th>
+      <th class="pr3 tl pv2 bb b--black-10">
+        Image
+      </th>
+      <th class="pr3 tl pv2 bb b--black-10">
+        <%= sortable "status" %>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @approval_images.each do |ai| %>
+      <tr id="<%= dom_id ai %>">
+        <td class="pr3 pv2 bb b--black-10">
+          <%= link_to "#{ai.product.brand} #{ai.product.name}", ai.product, class: "link blue" %>
+        </td>
+        <td class="pr3 pv2 bb b--black-10">
+          <%= link_to ai.user.full_name, ai.user, class: "link blue" %>
+        </td>
+        <td class="pr3 pv2 bb b--black-10">
+          <%= "yes" if Comment.find_by(author: ai.user, product: ai.product) %>
+        </td>
+        <td class="pr3 pv2 bb b--black-10">
+          <%= time_ago_in_words ai.created_at %> ago
+        </td>
+        <td class="pr3 pv2 bb b--black-10">
+          <%= time_ago_in_words ai.updated_at %> ago
+        </td>
+        <td class="pr3 pv2 bb b--black-10">
+          <%= link_to ai.image.url, target: "_blank" do %>
+            <%= image_tag ai.image, width: 100 %>
+          <% end %>
+        </td>
+        <td class="pr3 pv2 bb b--black-10">
+          <% case ai %>
+          <% when :waiting_approval?.to_proc %>
+            <span class="gold">Waiting Approval</span>
+          <% when :approved?.to_proc %>
+            <span class="green">Approved</span>
+          <% when :denied?.to_proc %>
+            <span class="red">Denied</span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

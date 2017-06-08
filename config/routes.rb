@@ -18,5 +18,6 @@ Rails.application.routes.draw do
     resources :users, only: :index
     resources :products, only: :index
     resources :comments, only: :index
+    resources :usage_approvals, only: :index
   end
 end
