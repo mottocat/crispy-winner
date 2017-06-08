@@ -8,6 +8,12 @@
       <%= link_to current_user.first_name,
                   current_user,
                   class: 'link dim black f6 f5-ns dib ml3' %>
+
+      <% if policy(:dashboard).index? %>
+        <%= link_to "Administration",
+                    administration_path,
+                    class: 'link dim black f6 f5-ns dib ml3' %>
+      <% end %>
  
       <%= link_to 'Edit User',
                   edit_user_registration_path,

@@ -1,0 +1,40 @@
+<%= render "header" %>
+<%= render "navigation" %>
+
+<table class="mt4 w-100">
+  <thead>
+    <tr>
+      <th class="pr3 tl pv2 bb b--black-10">
+        <%= sortable "product_id" %>
+      </th>
+      <th class="pr3 tl pv2 bb b--black-10">
+        <%= sortable "author_id" %>
+      </th>
+      <th class="pr3 tl pv2 bb b--black-10">
+        Body
+      </th>
+      <th class="pr3 tl pv2 bb b--black-10">
+        <%= sortable "created_at" %>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comments.each do |comment| %>
+      <tr id="<%= dom_id comment %>">
+        <td class="pr3 pv2 bb b--black-10">
+          <%= link_to "#{comment.product.brand} #{comment.product.name}", comment.product, class: "link blue" %>
+        </td>
+        <td class="pr3 pv2 bb b--black-10">
+          <%= link_to comment.author.full_name, comment.author, class: "link blue" %>
+        </td>
+        <td class="pr3 pv2 bb b--black-10">
+          <%= sanitize comment.body %>
+        </td>
+        <td class="pr3 pv2 bb b--black-10">
+          <%= time_ago_in_words comment.created_at %> ago
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -56,6 +56,7 @@ group :test do
   gem 'capybara-webkit'
   gem 'database_cleaner'
   gem 'highline-test'
+  gem 'launchy'
 end
 
 group :development do

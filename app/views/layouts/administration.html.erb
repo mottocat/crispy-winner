@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CrispyWinner</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+    <%= render 'nav' %>
+    <%= render 'messages' %>
+
+    <%= yield :messages %>
+
+    <section class="center w-100 pa3 ph5-ns pt5-ns">
+      <%= yield %>
+    </section>
+
+    <div class="pa3 mt3 mt5-ns bt b--black-10 tc silver f7">
+      <span class="f4">&#8593;</span>
+      END OF THE PAGE
+      <span class="f4">&#8593;</span>
+    </div>
+  </body>
+</html>

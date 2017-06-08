@@ -12,6 +12,7 @@ RSpec.describe "User", type: :feature do
   end
 
   let!(:user) { create :user, email: "name@example.org", first_name: "Crispy" }
+  let!(:admin) { create :admin, email: "admin@example.org" }
   let(:product1) { create :product }
   let(:product2) { create :product }
 
@@ -116,6 +117,17 @@ RSpec.describe "User", type: :feature do
         expect(page).to have_content(product2.name)
       end
     end
+  end
+
+  it "sees Administration link and goes to the page if is admin" do
+    login_with 'name@example.org'
+    expect(page).to_not have_link("Administration")
+
+    click_link "Sign out" 
+    login_with 'admin@example.org'
+    expect(page).to have_link("Administration")
+    click_link "Administration"
+    expect(page.current_path).to eq(administration_path)
   end
 
 
