@@ -4,19 +4,50 @@ module Administration
   RSpec.describe "Products", type: :feature do
     
     let!(:admin) { create :admin }
-
-    before do
-      login admin
-
+    let!(:product1) {
       create :product,
               brand: "ABC",
               name: "XYZ",
               created_at: 3.days.ago
+    }
 
+    let!(:product2) {
       create :product,
               brand: "DEF",
               name: "UVW",
               created_at: 4.days.ago
+    }
+
+
+    before do
+      login admin
+
+      create :usage_manifest,
+              product: product1,
+              status: :used
+
+      create :usage_manifest,
+              product: product1,
+              status: :used
+
+      create :approved_usage_manifest,
+              product: product1,
+              status: :using,
+              approved_image: create(:approval_image, product: product1)
+
+      create :approved_usage_manifest,
+              product: product2,
+              status: :using,
+              approved_image: create(:approval_image, product: product2)
+
+      create :approved_usage_manifest,
+              product: product2,
+              status: :using,
+              approved_image: create(:approval_image, product: product2)
+
+      create :usage_manifest,
+              product: product2,
+              status: :used
 
       visit administration_path
       click_link "PRODUCTS (2)"
@@ -48,6 +79,23 @@ module Administration
       click_link "Name"
       check_table_row_sorting %w(XYZ UVW)
     end
+
+    it "sorts by used_users_count" do
+      click_link "Used Users Count"
+      check_table_row_sorting %w(UVW XYZ)
+
+      click_link "Used Users Count"
+      check_table_row_sorting %w(XYZ UVW)
+    end
+
+    it "sorts by using_users_count" do
+      click_link "Using Users Count"
+      check_table_row_sorting %w(XYZ UVW)
+
+      click_link "Using Users Count"
+      check_table_row_sorting %w(UVW XYZ)
+    end
+
 
   end
 end

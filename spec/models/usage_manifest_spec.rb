@@ -68,4 +68,32 @@ RSpec.describe UsageManifest, type: :model do
     expect { approved_image.reload }.
                       to raise_exception(ActiveRecord::RecordNotFound)
   end
+
+  it "after save updates product using or used users count" do
+    expect {
+      subject.status = :using
+      subject.save(validate: false)
+    }.to change { subject.product.using_users_count }.by(1)
+
+    expect {
+      subject.status = :used
+      subject.save(validate: false)
+    }.to change { subject.product.used_users_count }.by(1)
+
+    expect {
+      subject.status = :using
+      subject.save(validate: false)
+    }.to change { subject.product.used_users_count }.by(-1)
+
+    expect {
+      subject.status = :used
+      subject.save(validate: false)
+    }.to change { subject.product.using_users_count }.by(-1)
+  end
+
+  it "after destroy updates product using or used users count" do
+    expect {
+      subject.destroy
+    }.to change { subject.product.used_users_count }.by(-1)
+  end
 end

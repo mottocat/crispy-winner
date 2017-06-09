@@ -18,12 +18,12 @@
 
 <div class="tc">
   <span class="dib mr3">
-    <span class="b"><%= @product.usage_manifests.with_status(:using).where.not(approved_image_id: nil).count %></span>
+    <span class="b"><%= @product.using_users_count %></span>
     using
   </span>
 
   <span class="dib mr3">
-    <span class="b"><%= @product.usage_manifests.with_status(:used).count %></span>
+    <span class="b"><%= @product.used_users_count %></span>
     used
   </span>
 

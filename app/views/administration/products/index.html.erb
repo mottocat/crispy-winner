@@ -11,6 +11,12 @@
         <%= sortable "name" %>
       </th>
       <th class="pr3 tl pv2 bb b--black-10">
+        <%= sortable "used_users_count" %>
+      </th>
+      <th class="pr3 tl pv2 bb b--black-10">
+        <%= sortable "using_users_count" %>
+      </th>
+      <th class="pr3 tl pv2 bb b--black-10">
         <%= sortable "created_at" %>
       </th>
     </tr>
@@ -24,6 +30,12 @@
         </td>
         <td class="pr3 pv2 bb b--black-10">
           <%= link_to product.name, product, class: "link blue" %>
+        </td>
+        <td class="pr3 pv2 bb b--black-10">
+          <%= product.used_users_count %>
+        </td>
+        <td class="pr3 pv2 bb b--black-10">
+          <%= product.using_users_count %>
         </td>
         <td class="pr3 pv2 bb b--black-10">
           <%= time_ago_in_words product.created_at %> ago

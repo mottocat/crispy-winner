@@ -25,6 +25,10 @@ FactoryGirl.define do
   factory :usage_manifest do
     user
     product
+    status :used
+  end
+
+  factory :approved_usage_manifest, parent: :usage_manifest do
     status :using
     approved_image
   end
