@@ -20,6 +20,10 @@
   <div class="fl w-75">
     <% if policy(comment).edit? or policy(comment).new? %>
       <%= f.text_area :body, rows: 4, class: "w-100", placeholder: "Add a comment..." %>
+      <ul class="gray f6 pl0 ml0">
+        <li class="ml3">Every user can have only one comment about this product.</li>
+        <li class="ml3">After you added an comment, you can edit the comment.</li>
+      </ul>
       <%= f.submit "Save", class: "fr dib" %>
     <% elsif current_user %>
       <div id="<%= dom_id(current_user.comment_on(product)) %>">
