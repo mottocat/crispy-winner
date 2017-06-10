@@ -1,1 +1,0 @@
-json.array! @product_usages, partial: 'product_usages/product_usage', as: :product_usage

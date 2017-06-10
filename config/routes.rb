@@ -11,7 +11,6 @@ Rails.application.routes.draw do
 
   resources :users, only: :show
 
-  resources :product_usages
 
   namespace :administration do
     get "/" => "base#index"
