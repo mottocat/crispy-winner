@@ -1,16 +1,21 @@
-<h2>Forgot your password?</h2>
+<div class="mw6 center mb5">
+  <h2 class="tc">Forgot your password?</h2>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+    <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+    <div class="mb3 cf">
+      <%= f.label :email, class: 'db mb2 b' %>
 
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
+      <%= f.email_field :email,
+                        autofocus: true,
+                        class: 'db border-box ba br2 b--black-20 pa2 w-100' %>
+    </div>
 
+    <div class="actions">
+      <%= f.submit "Send me reset password instructions" %>
+    </div>
+  <% end %>
+
+</div>
 <%= render "devise/shared/links" %>
