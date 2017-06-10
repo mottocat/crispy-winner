@@ -42,5 +42,19 @@ RSpec.describe "Product", type: :feature do
     expect(page).to have_content("2 used")
   end
 
+  it "searchs products" do
+    create :product, name: "XYZ Mobile"
+    create :product, brand: "ABC Biscuits"
+    visit products_path
+
+    fill_in "q", with: "XYZ"
+    click_button "Search"
+    expect(page).to have_content("XYZ Mobile")
+
+    fill_in "q", with: "ABC"
+    click_button "Search"
+    expect(page).to have_content("ABC Biscuits")
+  end
+
 
 end

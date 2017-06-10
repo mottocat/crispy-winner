@@ -1,11 +1,16 @@
 <h1 class="f3 tc mb3 mb4-ns bb b--black-40 pb3">
-  Products (<%= Product.count %>)
+  Products (<%= @products.size %>)
   <% if policy(Product).new? %>
     <%= link_to '[Add new]',
                 new_product_path,
                 class: 'silver f5 link' %>
   <% end %>
 </h1>
+
+<%= form_tag products_path, method: :get do %>
+  <%= text_field_tag :q , params[:q], autofocus: true %>
+  <%= submit_tag "Search" %>
+<% end %>
 
 <%= render @products %>
 

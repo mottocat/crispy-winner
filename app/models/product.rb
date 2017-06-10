@@ -7,4 +7,10 @@ class Product < ApplicationRecord
   # Validations
   validates :name, :brand, presence: true
 
+  # Dependencies
+  include PgSearch
+  pg_search_scope :search, against: { name: 'A', brand: 'B' }
+
+
+
 end
