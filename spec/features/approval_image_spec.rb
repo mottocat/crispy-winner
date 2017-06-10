@@ -68,6 +68,14 @@ RSpec.describe "Approval Image", type: :feature do
       expect(page).to_not have_css("The picture you sended before denied")
       expect(page).to have_content('0 using') 
     end
+
+    it "approves the image, can clickable on comment" do
+      create :approved_usage_manifest, product: product
+      visit product_comments_path(product)
+      within "#comment_#{comment.id} .w-25" do
+        expect(page).to have_css("a", count: 1)
+      end
+    end
   end
 
 end

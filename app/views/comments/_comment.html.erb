@@ -3,10 +3,12 @@
 
   <div class="fl w-25 b">
     <%= link_to comment.author.full_name, comment.author, class: "link black" %>
-    <% if comment.author.usage_manifest_for(comment.product).try(:approved_image_id) %>
-      <span class="dib br-100 tc bg-green white" 
-            title="The user approved that is using this product" 
-            style="width: 1.3rem; line-height: 1.3rem">&#x2713;</span>
+    <% if (um = comment.author.usage_manifest_for(comment.product)).try(:approved_image_id) %>
+      <%= link_to um.approved_image.image.url, target: "_blank" do %>
+        <span class="dib br-100 tc bg-green white" 
+              title="The user approved that is using this product" 
+              style="width: 1.3rem; line-height: 1.3rem">&#x2713;</span>
+      <% end %>
     <% end %>
 
     <% if comment.author.usage_manifest_for(comment.product).try(:used?) %>
@@ -23,6 +25,7 @@
           <%= time_ago_in_words comment.created_at %> ago
         <% end %>
       </date>
+
       
       <% if policy(comment).update? %>
         <%= link_to '[edit]',
