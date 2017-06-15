@@ -16,14 +16,10 @@
 
     <%= yield :messages %>
 
-    <section class="center w-100 pa3 ph5-ns pt5-ns">
+    <section class="container-fluid px-5 py-5 bg-white mt-5">
       <%= yield %>
     </section>
 
-    <div class="pa3 mt3 mt5-ns bt b--black-10 tc silver f7">
-      <span class="f4">&#8593;</span>
-      END OF THE PAGE
-      <span class="f4">&#8593;</span>
-    </div>
+    <%= render 'end_of_page' %>
   </body>
 </html>

@@ -50,7 +50,7 @@ RSpec.describe "Approval Image", type: :feature do
       visit product_approval_images_path(product)
       click_on "Approve"
       visit product_comments_path(product)
-      expect(page).to have_css("#comment_#{comment.id} .bg-green")
+      expect(page).to have_css("#comment_#{comment.id} .bg-success")
       expect(page).to have_content("1 using")
     end
 
@@ -64,7 +64,7 @@ RSpec.describe "Approval Image", type: :feature do
       visit product_approval_images_path(product)
       click_on "Deny"
       visit product_comments_path(product)
-      expect(page).to_not have_css("#comment_#{comment.id} .bg-green")
+      expect(page).to_not have_css("#comment_#{comment.id} .bg-success")
       expect(page).to_not have_css("The picture you sended before denied")
       expect(page).to have_content('0 using') 
     end
@@ -72,7 +72,7 @@ RSpec.describe "Approval Image", type: :feature do
     it "approves the image, can clickable on comment" do
       create :approved_usage_manifest, product: product
       visit product_comments_path(product)
-      within "#comment_#{comment.id} .w-25" do
+      within "#comment_#{comment.id} .col-sm-2" do
         expect(page).to have_css("a", count: 1)
       end
     end

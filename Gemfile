@@ -18,7 +18,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'devise', '~> 4.2'
 gem 'carrierwave', '~> 1.0'
-gem 'bootstrap', github: 'twbs/bootstrap-rubygem'
+gem 'bootstrap', '~> 4.0.0.alpha5'
 gem 'pundit'
 gem 'highline'
 

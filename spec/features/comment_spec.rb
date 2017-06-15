@@ -8,7 +8,7 @@ RSpec.describe "Comment", type: :feature do
     login user
     visit product_comments_path(product)
     expect {
-      within "#new_comment" do
+      within "form#new_comment" do
         fill_in "comment_body",
           with: "My comment is about that you have never seen before." 
         click_button "Save"
@@ -35,7 +35,7 @@ RSpec.describe "Comment", type: :feature do
     expect(page).to have_content("This comment is going to removed.")
 
     handle_js_confirm do
-      within "#new_comment" do
+      within "div#new_comment" do
         click_link "×"
       end
     end
@@ -50,7 +50,7 @@ RSpec.describe "Comment", type: :feature do
     login user
     visit product_comments_path(product)
 
-    within "#new_comment" do
+    within "form#new_comment" do
       click_link "[edit]"
     end
 

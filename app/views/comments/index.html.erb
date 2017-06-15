@@ -1,12 +1,19 @@
-<%= render "products/product_header" %>
+<div class="container mt-5">
+  <div class="py-5 px-5 bg-white rounded">
 
-<h2 class="normal f6 tr mb2 pb2 bb b--black-10">COMMENTS (<%= @product.comments.count %>)</h2>
-  
-<%= render @product.comments %>
+    <%= render "products/product_header" %>
 
-<div class="pv3 cf mb bt b--black-10">
-<h2 class="normal f6 tr mb2 pb2 bb b--black-10">YOUR COMMENT</h2>
-  <%= render 'form',
-              comment: (@comment or @product.comments.new),
-              product: @product %>
+    <h3 class="h6 bb-1 mb-2 pb-2 text-muted mt-5">COMMENTS (<%= @product.comments.count %>)</h3>
+    
+    <div class="mt-4">
+      <%= render @product.comments %>
+    </div>
+
+    <div class="pv3 cf mb bt b--black-10">
+    <h2 class="h6 bb-1 mb-2 pb-2 text-muted mt-5">YOUR COMMENT</h2>
+      <%= render 'form',
+                  comment: (@comment or @product.comments.new),
+                  product: @product %>
+    </div>
+  </div>
 </div>

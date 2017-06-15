@@ -1,22 +1,22 @@
 <%= render "header" %>
 <%= render "navigation" %>
 
-<table class="mt4 w-100">
-  <thead>
+<table class="table table-hover mt-5">
+  <thead class="thead-default">
     <tr>
-      <th class="pr3 tl pv2 bb b--black-10">
+      <th>
         <%= sortable "brand" %>
       </th>
-      <th class="pr3 tl pv2 bb b--black-10">
+      <th>
         <%= sortable "name" %>
       </th>
-      <th class="pr3 tl pv2 bb b--black-10">
+      <th>
         <%= sortable "used_users_count" %>
       </th>
-      <th class="pr3 tl pv2 bb b--black-10">
+      <th>
         <%= sortable "using_users_count" %>
       </th>
-      <th class="pr3 tl pv2 bb b--black-10">
+      <th>
         <%= sortable "created_at" %>
       </th>
     </tr>
@@ -25,19 +25,19 @@
   <tbody>
     <% @products.each do |product| %>
       <tr id="<%= dom_id product %>">
-        <td class="pr3 pv2 bb b--black-10">
+        <td>
           <%= link_to product.brand, product, class: "link blue" %>
         </td>
-        <td class="pr3 pv2 bb b--black-10">
+        <td>
           <%= link_to product.name, product, class: "link blue" %>
         </td>
-        <td class="pr3 pv2 bb b--black-10">
+        <td>
           <%= product.used_users_count %>
         </td>
-        <td class="pr3 pv2 bb b--black-10">
+        <td>
           <%= product.using_users_count %>
         </td>
-        <td class="pr3 pv2 bb b--black-10">
+        <td>
           <%= time_ago_in_words product.created_at %> ago
         </td>
       </tr>

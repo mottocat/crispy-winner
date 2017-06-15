@@ -1,18 +1,24 @@
-<div class="mt4 mt5-ns mb4 cf pb3 bb b--black-40">
-
-  <div class="nowrap overflow-x-auto tc">
-    <%= link_to "OVERVIEW",
+<ul class="nav nav-tabs mt-5">
+  <li class="nav-item">
+    <%= link_to "Overview",
                 @product,
-                class: "link dim f6 f5-ns b dib ml3 blue" %>
-
-    <%= link_to "COMMENTS",
+                class: "nav-link" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to "Comments",
                 product_comments_path(@product),
-                class: "link dim f6 f5-ns b dib ml3 blue" %>
-
-    <span class="f6 f5-ns b dib ml3 black-20">SHOPS</span>
-    <span class="f6 f5-ns b dib ml3 black-20">FORUM</span>
-    <span class="f6 f5-ns b dib ml3 black-20">SUPPORT</span>
-    <span class="f6 f5-ns b dib ml3 black-20">...</span>
-  </div>
-
-</div>
+                class: "nav-link active" %>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="#">Shops</a>
+  </li>
+    <li class="nav-item">
+    <a class="nav-link disabled" href="#">Forum</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="#">Support</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="#">...</a>
+  </li>
+</ul>

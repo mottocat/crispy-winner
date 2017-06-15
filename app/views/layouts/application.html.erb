@@ -16,14 +16,8 @@
 
     <%= yield :messages %>
 
-    <section class="center mw7 pa3 ph5-ns pt5-ns">
-      <%= yield %>
-    </section>
+    <%= yield %>
 
-    <div class="pa3 mt3 mt5-ns bt b--black-10 tc silver f7">
-      <span class="f4">&#8593;</span>
-      END OF THE PAGE
-      <span class="f4">&#8593;</span>
-    </div>
+    <%= render 'end_of_page' %>
   </body>
 </html>

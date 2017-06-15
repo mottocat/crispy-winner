@@ -1,16 +1,32 @@
-<h1 class="f3 tc mb3 mb4-ns bb b--black-40 pb3">
-  Products (<%= @products.size %>)
-  <% if policy(Product).new? %>
-    <%= link_to '[Add new]',
-                new_product_path,
-                class: 'silver f5 link' %>
+<div class="container mt-5">
+  <%= form_tag products_path, method: :get, id: 'search_form' do %>
+    <%= text_field_tag :q , 
+                        params[:q],
+                        autofocus: true,
+                        placeholder: "Search",
+                        class: 'form-control form-control-lg px-5' %>
   <% end %>
-</h1>
+</div>
 
-<%= form_tag products_path, method: :get do %>
-  <%= text_field_tag :q , params[:q], autofocus: true %>
-  <%= submit_tag "Search" %>
-<% end %>
+<div class="container mt-3">
+  <div class="py-5 px-5 bg-white rounded">
+    <% if policy(Product).new? %>
+      <%= link_to '[Add new]',
+                  new_product_path,
+                  class: 'float-right' %>
+    <% end %>
+    <h3 class="h6 bb-1 mb-3 pb-2 text-muted">PRODUCTS (<%= @products.size %>)</h3>
+    
+    <%= render @products %>
+  </div>
+</div>
 
-<%= render @products %>
+<script type="text/javascript">
+  
+  var searchInput = document.getElementById('q');
+  var strLen = searchInput.value.length;
+  searchInput.setSelectionRange(strLen, strLen); 
+
+</script>
+
 
