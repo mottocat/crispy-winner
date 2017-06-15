@@ -1,31 +1,35 @@
-<h1 class="f4 tc mb4"><%= @user.full_name %></h1>
+<div class="container px-5 py-5 bg-white mt-5">
+  <h1 class="h4"><%= @user.full_name %></h1>
 
-<h2 class="f6 mt3 pb3 bb b--black-20">USING (<%= (ums = @user.usage_manifests.where(status: :using)).count %>)</h2>
+  <h2 class="h6 bb-1 mt-5 mb-3 pb-2 text-muted">USING (<%= (ums = @user.usage_manifests.where(status: :using)).count %>)</h2>
 
-<% ums.each do |um| %>
-  <div class="pv3 cf bb b--black-05" id="using">
-    <div class="fl w-75">
-      <%= link_to um.product.name, product_comments_path(um.product), class: "link blue" %>
+  <% ums.each do |um| %>
+    <div class="row product py-2" id="using">
+      <div class="col-10">
+        <%= link_to um.product.name, product_comments_path(um.product), class: "link blue" %>
+      </div>
+      <div class="col-2">
+        using
+        <% if um.approved_image_id %>
+          <span class="dib br-100 tc bg-green white" style="width: 1.3rem; line-height: 1.3rem">&#x2713;</span>
+        <% end %>
+      </div>
     </div>
-    <div class="fr w-25 tr">
-      using
-      <% if um.approved_image_id %>
-        <span class="dib br-100 tc bg-green white" style="width: 1.3rem; line-height: 1.3rem">&#x2713;</span>
-      <% end %>
-    </div>
-  </div>
-<% end %>
+  <% end %>
 
-<h2 class="f6 mt3 pb3 bb b--black-20">USED (<%= (ums = @user.usage_manifests.where(status: :used)).count %>)</h2>
+  <h2 class="h6 bb-1 mt-5 mb-3 pb-2 text-muted">USED (<%= (ums = @user.usage_manifests.where(status: :used)).count %>)</h2>
 
-<% ums.each do |um| %>
-  <div class="pv3 cf bb b--black-05" id="used">
-    <div class="fl w-75">
-      <%= link_to um.product.name, product_comments_path(um.product), class: "link blue" %>
+  <% ums.each do |um| %>
+    <div class="row product py-2" id="used">
+      <div class="col-10">
+        <%= link_to um.product.name, product_comments_path(um.product), class: "link blue" %>
+      </div>
+      <div class="col-2">
+        used
+        <span class="dib" style="width: 1.3rem; line-height: 1.3rem">&#128273;</span>
+      </div>
     </div>
-    <div class="fr w-25 tr">
-      used
-      <span class="dib" style="width: 1.3rem; line-height: 1.3rem">&#128273;</span>
-    </div>
-  </div>
-<% end %>
+  <% end %>
+  
+</div>
+

@@ -1,91 +1,102 @@
-<h2 class="tc pb3 mb3 mb4-ns bb b--black-40">Edit <%= resource_name.to_s.humanize %></h2>
+<div class="container px-5 py-5 bg-white mt-5">
+  <h2 class="text-center h5">Edit <%= resource_name.to_s.humanize %></h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= devise_error_messages! %>
 
-  <div class="mb4 cf">
-    <%= f.label :name,
-                class: 'db mb2 b' %>
-    <%= f.text_field :first_name,
-                      autofocus: true,
-                      placeholder: "First name",
-                      class: 'dib fl w-50 border-box bt bb bl br-0 b--black-20 br2 br--left pa2' %>
+    <div class="form-group">
+      <%= f.label :name %>
+      <div class="input-group">
+        <%= f.text_field :first_name,
+                          autofocus: true,
+                          placeholder: "First name",
+                          class: 'form-control' %>
 
-    <%= f.text_field :last_name,
-                      placeholder: "Last name",
-                      class: 'dib fl w-50 border-box ba br2 br--right b--black-20 pa2' %>
-  </div>
-
-  <div class="mb4">
-    <%= f.label :email,
-                class: 'b db mb2' %>
-
-    <%= f.email_field :email, 
-                      class: 'db border-box hover-black w-100 pa2' %>
-
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <div class="flex items-center justify-center pa3 bg-light-blue navy mt2">
-        <svg class="w1" data-icon="info" viewBox="0 0 32 32" style="fill:currentcolor">
-          <title>info icon</title>
-          <path d="M16 0 A16 16 0 0 1 16 32 A16 16 0 0 1 16 0 M19 15 L13 15 L13 26 L19 26 z M16 6 A3 3 0 0 0 16 12 A3 3 0 0 0 16 6"></path>
-        </svg>
-        <span class="f6 ml3">Currently waiting confirmation for: <b><%= resource.unconfirmed_email %></b></span>
+        <%= f.text_field :last_name,
+                          placeholder: "Last name",
+                          class: 'form-control' %>
+        
       </div>
-    <% end %>
-
-  </div>
-
-
-  <div class="mb4">
-    <div class="b mb2">
-      <%= f.label :password %>
-      <i class="normal f6 fr">leave blank if you don't want to change it</i>
     </div>
 
-    <%= f.password_field :password,
-                          autocomplete: "off",
-                          class: 'db border-box hover-black w-100 pa2' %>
+    <div class="form-group">
+      <%= f.label :email %>
+      <%= f.email_field :email, class: 'form-control' %>
 
-    <% if @minimum_password_length %>
-      <em class="mt2 db f6 tr"><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div class="alert alert-warning">
+          <svg class="col-1" data-icon="info" viewBox="0 0 32 32" style="fill:currentcolor">
+            <title>info icon</title>
+            <path d="M16 0 A16 16 0 0 1 16 32 A16 16 0 0 1 16 0 M19 15 L13 15 L13 26 L19 26 z M16 6 A3 3 0 0 0 16 12 A3 3 0 0 0 16 6"></path>
+          </svg>
+          <span class="text-warning">Currently waiting confirmation for: <b><%= resource.unconfirmed_email %></b></span>
+        </div>
+      <% end %>
 
-  <div class="mb4">
-    <%= f.label :password_confirmation,
-                class: 'b mb2 db' %>
-
-    <%= f.password_field :password_confirmation,
-                          autocomplete: "off",
-                          class: 'db border-box hover-black w-100 pa2' %>
-  </div>
-
-  <div class="mb4">
-    <div class="b mb2">
-      <%= f.label :current_password %>
-      <i class="normal f6 fr">we need your current password to confirm your changes</i>
     </div>
 
-    <%= f.password_field :current_password,
-                          autocomplete: "off",
-                          class: 'db border-box hover-black w-100 pa2' %>
-  </div>
 
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-6">
+          <%= f.label :password %>
+        </div>
+        <div class="col-6 text-right">
+          <i class="text-muted">leave blank if you don't want to change it</i>
+        </div>
+      </div>
+
+      <%= f.password_field :password,
+                            autocomplete: "off",
+                            class: 'form-control' %>
+
+      <% if @minimum_password_length %>
+        <em class="mt-2 d-block text-muted"><%= @minimum_password_length %> characters minimum</em>
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password_confirmation %>
+
+      <%= f.password_field :password_confirmation,
+                            autocomplete: "off",
+                            class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+
+      <div class="row">
+        <div class="col-4">
+          <%= f.label :current_password %>
+        </div>
+        <div class="col-8 text-right">
+          <i class="text-muted">we need your current password to confirm your changes</i>
+        </div>
+      </div>
+
+      <%= f.password_field :current_password,
+                            autocomplete: "off",
+                            class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.submit "Update", class: 'btn btn-primary' %>
+    </div>
+  <% end %>
 
 
 
-<h3 class="mt4 tc mb3 mb4-ns bb b--black-40 pb3">Cancel my account</h3>
+  <h3 class="mt-5 bb-1 h6">Cancel my account</h3>
 
-<p>
-  Unhappy?
-  <%= link_to "Cancel my account",
-              registration_path(resource_name),
-              data: { confirm: "Are you sure?" },
-              method: :delete,
-              class: 'link dark-red' %>
+  <p>
+    Unhappy?
+    <%= link_to "Cancel my account",
+                registration_path(resource_name),
+                data: { confirm: "Are you sure?" },
+                method: :delete,
+                class: 'text-danger' %>
 
-</p>
+  </p>
+  
+    
+</div>

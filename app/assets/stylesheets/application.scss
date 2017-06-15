@@ -1,0 +1,87 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_self
+ */
+
+
+@import "bootstrap";
+@import "products";
+
+
+body {
+  color: $black;
+}
+
+.sct {
+  margin-top: 50px
+}
+
+.category-section {
+  margin-top: 30px;
+}
+
+.horizontal-scrollable {
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.horizontal-scrollable {
+  display: inline-block;
+}
+
+.category-title {
+  text-align: right;
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 760px;
+  }
+}
+
+.py-5 {
+  padding-top: 50px;
+  padding-bottom: 50px; 
+}
+
+.px-5 {
+  padding-right: 50px;
+  padding-left: 50px;
+}
+
+.py-05 {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.mp-50 {
+  margin: 0 -50px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.bg-white {
+  background: #fff;
+}
+
+.shop-item:hover {
+  background: #f0f0f0
+}
+
+.bb-1 {
+  border-bottom: 1px solid $nav-tabs-border-color;
+}
+
+body {
+  background: #eee;
+}

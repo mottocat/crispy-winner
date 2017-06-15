@@ -1,11 +1,15 @@
 <% @product = @comment.product %>
+<div class="container mt-5">
+  <div class="py-5 px-5 bg-white rounded">
+    <%= render "products/product_header" %>
 
-<%= render "products/product_header" %>
+    <h3 class="h6 bb-1 mb-1 pb-2 text-muted mt-5">YOUR COMMENT</h3>
+  
+    <%= render 'form', comment: @comment, product: @comment.product %>
 
-<h1 class="normal f6 tr mb2 pb2 bb b--black-10">YOUR COMMENT</h1>
-
-<%= render 'form', comment: @comment, product: @comment.product %>
-
-<%= link_to '&larr; Back'.html_safe,
-      product_comments_path(@comment.product),
-      class: "link dib mt5 blue" %>
+    <%= link_to '&larr; Back'.html_safe,
+          product_comments_path(@comment.product),
+          class: "link dib mt5 blue" %>
+  </div>
+</div>
+  

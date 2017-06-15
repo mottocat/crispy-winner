@@ -1,19 +1,19 @@
-<div class="mw6 center mb5">
-  <h2 class="tc">Forgot your password?</h2>
+<div class="mt-5 container px-5 py-5 bg-white">
+  <h2 class="h5 text-center">Forgot your password?</h2>
 
   <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
     <%= devise_error_messages! %>
 
-    <div class="mb3 cf">
-      <%= f.label :email, class: 'db mb2 b' %>
+    <div class="form-group">
+      <%= f.label :email %>
 
       <%= f.email_field :email,
                         autofocus: true,
-                        class: 'db border-box ba br2 b--black-20 pa2 w-100' %>
+                        class: 'form-control' %>
     </div>
 
-    <div class="actions">
-      <%= f.submit "Send me reset password instructions" %>
+    <div class="form-group">
+      <%= f.submit "Send me reset password instructions", class: 'btn btn-primary' %>
     </div>
   <% end %>
 

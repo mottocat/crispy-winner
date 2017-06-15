@@ -1,28 +1,28 @@
 <%= render "header" %>
 <%= render "navigation" %>
 
-<table class="mt4 w-100">
-  <thead>
+<table class="table table-hover mt-5">
+  <thead class="thead-default">
     <tr>
-      <th class="pr3 tl pv2 bb b--black-10">
+      <th>
         <%= sortable "product_id" %>
       </th>
-      <th class="pr3 tl pv2 bb b--black-10">
+      <th>
         <%= sortable "user_id" %>
       </th>
-      <th class="pr3 tl pv2 bb b--black-10">
+      <th>
         User Has Comment
       </th>
-      <th class="pr3 tl pv2 bb b--black-10">
+      <th>
         <%= sortable "created_at" %>
       </th>
-      <th class="pr3 tl pv2 bb b--black-10">
+      <th>
         <%= sortable "updated_at" %>
       </th>
-      <th class="pr3 tl pv2 bb b--black-10">
+      <th>
         Image
       </th>
-      <th class="pr3 tl pv2 bb b--black-10">
+      <th>
         <%= sortable "status" %>
       </th>
     </tr>
@@ -31,27 +31,27 @@
   <tbody>
     <% @approval_images.each do |ai| %>
       <tr id="<%= dom_id ai %>">
-        <td class="pr3 pv2 bb b--black-10">
+        <td>
           <%= link_to "#{ai.product.brand} #{ai.product.name}", ai.product, class: "link blue" %>
         </td>
-        <td class="pr3 pv2 bb b--black-10">
+        <td>
           <%= link_to ai.user.full_name, ai.user, class: "link blue" %>
         </td>
-        <td class="pr3 pv2 bb b--black-10">
+        <td>
           <%= "yes" if Comment.find_by(author: ai.user, product: ai.product) %>
         </td>
-        <td class="pr3 pv2 bb b--black-10">
+        <td>
           <%= time_ago_in_words ai.created_at %> ago
         </td>
-        <td class="pr3 pv2 bb b--black-10">
+        <td>
           <%= time_ago_in_words ai.updated_at %> ago
         </td>
-        <td class="pr3 pv2 bb b--black-10">
+        <td>
           <%= link_to ai.image.url, target: "_blank" do %>
             <%= image_tag ai.image, width: 100 %>
           <% end %>
         </td>
-        <td class="pr3 pv2 bb b--black-10">
+        <td>
           <% case ai %>
           <% when :waiting_approval?.to_proc %>
             <span class="gold">Waiting Approval</span>

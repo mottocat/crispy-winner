@@ -11,7 +11,7 @@ module ApplicationHelper
     sorted_by = column == sort_column ? "(#{sort_direction})" : nil
     direction = (column == sort_column && sort_direction == "asc") ? "desc" : "asc"
 
-    link_to({sort: column, direction: direction}, { class: "link blue" }) do
+    link_to({sort: column, direction: direction}) do
       "#{title} #{sorted_by}"
     end
   end

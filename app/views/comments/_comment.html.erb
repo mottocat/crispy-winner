@@ -1,45 +1,36 @@
-<div class="pv3 cf bb b--black-05 lh-copy"
-      id="<%= dom_id(comment) %>">
-
-  <div class="fl w-25 b">
+<div class="row py-2" id="<%= dom_id(comment) %>">
+  <div class="col-sm-2">
     <%= link_to comment.author.full_name, comment.author, class: "link black" %>
     <% if (um = comment.author.usage_manifest_for(comment.product)).try(:approved_image_id) %>
       <%= link_to um.approved_image.image.url, target: "_blank" do %>
-        <span class="dib br-100 tc bg-green white" 
+        <span class="d-inline-block rounded-circle text-center bg-success text-white" 
               title="The user approved that is using this product" 
               style="width: 1.3rem; line-height: 1.3rem">&#x2713;</span>
       <% end %>
     <% end %>
 
     <% if comment.author.usage_manifest_for(comment.product).try(:used?) %>
-      <span class="dib"
-            title="The user used this product before"
+      <span title="The user used this product before"
             style="width: 1.3rem; line-height: 1.3rem">&#128273;</span>
     <% end %>
   </div>
-
-  <div class="fl w-75">
-      <%= comment.body %>
-      <date>
-        <%= link_to comment, class: "link blue dib ml1" do %>
-          <%= time_ago_in_words comment.created_at %> ago
-        <% end %>
-      </date>
-
-      
-      <% if policy(comment).update? %>
-        <%= link_to '[edit]',
-                    edit_comment_path(comment),
-                    class: 'link blue dib ml1' %>
-
-        <%= link_to '&times;'.html_safe,
-                    comment,
-                    method: :delete,
-                    data: { confirm: 'Are you sure?' },
-                    class: 'link blue dib ml1' %>
+  <div class="col-sm-10">
+    <%= comment.body %>
+    <date>
+      <%= link_to comment do %>
+        <%= time_ago_in_words comment.created_at %> ago
       <% end %>
+    </date>
 
     
-  </div>
-  
+    <% if policy(comment).update? %>
+      <%= link_to '[edit]', edit_comment_path(comment) %>
+
+      <%= link_to '&times;'.html_safe,
+                  comment,
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' } %>
+    <% end %>
+    
+  </p></div>
 </div>

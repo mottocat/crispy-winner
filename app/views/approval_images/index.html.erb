@@ -1,38 +1,47 @@
-<%= render "products/product_header" %>
+<div class="container mt-5">
+  <div class="py-5 px-5 bg-white rounded">
+    <%= render "products/product_header" %>
 
-<h2 class="normal f6 tr mb2 pb2 bb b--black-10">THE USERS' IMAGES FOR APPROVAL</h2>
-  
-<% ApprovalImage.where(product: @product, status: :waiting_approval).each do |ai| %>
-  <div class="pv3 cf mb bt b--black-10">
-    <div class="fl w-25 pa2">
-      <%= image_tag ai.image %>
-    </div>
+    <h3 class="mt-5 h5 bb-1 pb-2 text-muted">THE USERS' IMAGES FOR APPROVAL</h3>
 
-    <div class="fr w-15 pa2">
-      <%= form_for [@product, ai] do |f| %>
-        <%= f.hidden_field :status, value: "approved" %>
-        <%= f.submit "Approve" %>
-      <% end %>
-    </div>
 
-    <div class="fr w-15 pa2">
-      <%= form_for [@product, ai] do |f| %>
-        <%= f.hidden_field :status, value: "denied" %>
-        <%= f.submit "Deny" %>
-      <% end %>
-    </div>
+    <% ApprovalImage.where(product: @product, status: :waiting_approval).each do |ai| %>
+      <div class="row product">
+        <div class="col-10">
+          <%= image_tag ai.image, class: 'img-thumbnail' %>
+        </div>
+
+        <div class="col-1">
+          <%= form_for [@product, ai] do |f| %>
+            <%= f.hidden_field :status, value: "approved" %>
+            <%= f.submit "Approve" %>
+          <% end %>
+        </div>
+
+        <div class="col-1">
+          <%= form_for [@product, ai] do |f| %>
+            <%= f.hidden_field :status, value: "denied" %>
+            <%= f.submit "Deny" %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+
+    <h3 class="mt-5 h5 bb-1 pb-2 text-muted">APPROVED IMAGES</h3>
+
+      
+    <% ApprovalImage.where(product: @product, status: :approved).each do |ai| %>
+      <div class="row product">
+        <div class="col-2">
+          <%= image_tag ai.image, class: 'img-fluid' %>
+        </div>
+        <div class="col-10 text-right">
+          <%= ai.user.full_name %>
+        </div>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>
 
-<h2 class="normal f6 tr mb2 pb2 bb b--black-10">APPROVED IMAGES</h2>
   
-<% ApprovalImage.where(product: @product, status: :approved).each do |ai| %>
-  <div class="cf pv3 mb2 bb b--black-10">
-    <div class="fl w-25 pa2">
-      <%= image_tag ai.image %>
-    </div>
-    <div class="fl w-25 pa2">
-      <%= ai.user.full_name %>
-    </div>
-  </div>
-<% end %>

@@ -1,31 +1,31 @@
 <%= render "header" %>
 <%= render "navigation" %>
 
-<table class="mt4">
-  <thead>
+<table class="mt-5 table table-hover">
+  <thead class="thead-default">
     <tr>
-      <th class="pr3 tl pv2 bb b--black-10">
+      <th>
         <%= sortable "first_name" %>
       </th>
-      <th class="pr3 tl pv2 bb b--black-10">
+      <th>
         <%= (sortable "last_name").html_safe %>
       </th>
-      <th class="pr3 tl pv2 bb b--black-10">
+      <th>
         <%= sortable "email" %>
       </th>
-      <th class="pr3 tl pv2 bb b--black-10">
+      <th>
         <%= sortable "sign_in_count" %>
       </th>
-      <th class="pr3 tl pv2 bb b--black-10">
+      <th>
         <%= sortable "current_sign_in_at" %>
       </th>
-      <th class="pr3 tl pv2 bb b--black-10">
+      <th>
         <%= sortable "last_sign_in_at" %>
       </th>
-      <th class="pr3 tl pv2 bb b--black-10">
+      <th>
         <%= sortable "created_at" %>
       </th>
-      <th class="pr3 tl pv2 bb b--black-10">
+      <th>
         <%= sortable "admin" %>
       </th>
     </tr>
@@ -34,29 +34,29 @@
   <tbody>
     <% @users.each do |user| %>
       <tr id="<%= dom_id user %>">
-        <td class="pr3 pv2 bb b--black-10">
+        <td>
           <%= link_to user.first_name, user, class: "link blue" %>
         </td>
-        <td class="pr3 pv2 bb b--black-10">
+        <td>
           <%= link_to user.last_name, user, class: "link blue" %>
         </td>
-        <td class="pr3 pv2 bb b--black-10"><%= user.email %></td>
-        <td class="pr3 pv2 bb b--black-10"><%= user.sign_in_count %></td>
-        <td class="pr3 pv2 bb b--black-10">
+        <td><%= user.email %></td>
+        <td><%= user.sign_in_count %></td>
+        <td>
           <% if user.current_sign_in_at %>
             <%= time_ago_in_words user.current_sign_in_at %> ago
           <% end %>
           &nbsp;
         </td>
-        <td class="pr3 pv2 bb b--black-10">
+        <td>
           <% if user.last_sign_in_at %>
             <%= time_ago_in_words(user.last_sign_in_at) %> ago
           <% end %>
         </td>
-        <td class="pr3 pv2 bb b--black-10">
+        <td>
           <%= time_ago_in_words user.created_at %> ago
         </td>
-        <td class="pr3 pv2 bb b--black-10">
+        <td>
           <%= "yes" if user.admin? %>
           &nbsp;
         </td>

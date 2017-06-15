@@ -1,54 +1,59 @@
-<div class="mw6 center mb5">
-  <h2 class="tc">Sign up</h2>
+<div class="mt-5 container py-5 px-5 bg-white">
+  <h2 class="text-center h5">Sign up</h2>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= devise_error_messages! %>
 
-    <div class="mb3 cf">
-      <%= f.label :name,
-                  class: 'db mb2 b' %>
-      <%= f.text_field :first_name,
-                        autofocus: true,
-                        placeholder: "First name",
-                        class: 'dib fl w-50 border-box bt bb bl br-0 b--black-20 br2 br--left pa2' %>
+    <div class="form-group">
+      <%= f.label :name %>
+      <div class="input-group">
+        <%= f.text_field :first_name,
+                          autofocus: true,
+                          placeholder: "First name",
+                          class: 'form-control' %>
 
-      <%= f.text_field :last_name,
-                        autofocus: true,
-                        placeholder: "Last name",
-                        class: 'dib fl w-50 border-box ba br2 br--right b--black-20 pa2' %>
+        <%= f.text_field :last_name,
+                          autofocus: true,
+                          placeholder: "Last name",
+                          class: 'form-control' %>
+      </div>
     </div>
 
-    <div class="mb3">
-      <%= f.label :email,
-                  class: 'db mb2 b' %>
+    <div class="form-group">
+      <%= f.label :email %>
       <%= f.email_field :email,
                         autofocus: true,
-                        class: 'db border-box ba br2 b--black-20 pa2 w-100' %>
+                        class: 'form-control' %>
     </div>
 
-    <div class="mb3">
-      <%= f.label :password,
-                  class: 'db b' %>
-      <% if @minimum_password_length %>
-        <em class="mb2 db f6 black-60">(<%= @minimum_password_length %> characters minimum)</em>
-      <% end %>
+    <div class="form-group">
+
+      <div class="row">
+        <div class="col-6">
+          <%= f.label :password %>
+          
+        </div>
+        <div class="col-6 text-right">
+          <% if @minimum_password_length %>
+            <em class="mb-2 d-block h6 text-muted float-right">(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %>
+        </div>
+      </div>
 
       <%= f.password_field  :password,
                             autocomplete: "off",
-                            class: 'db border-box ba br2 b--black-20 pa2 w-100' %>
+                            class: 'form-control' %>
     </div>
 
-    <div class="mb3">
-      <%= f.label :password_confirmation,
-
-                  class: 'db mb2 b' %>
+    <div class="form-group">
+      <%= f.label :password_confirmation %>
       <%= f.password_field :password_confirmation,
                             autocomplete: "off",
-                            class: 'db border-box ba br2 b--black-20 pa2 w-100' %>
+                            class: 'form-control' %>
     </div>
 
-    <div class="actions">
-      <%= f.submit "Sign up" %>
+    <div class="form-group">
+      <%= f.submit "Sign up", class: 'btn btn-primary' %>
     </div>
   <% end %>
 

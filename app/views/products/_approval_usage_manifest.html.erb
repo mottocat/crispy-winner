@@ -1,38 +1,46 @@
 <% if current_user.try(:usage_manifest_for, @product).try(:need_approval?) %>
   <%= content_for :messages do %>
-    <div class="flex items-center justify-center pa4 bg-lightest-blue">
-      <svg class="w1" data-icon="info" viewBox="0 0 32 32" style="fill:currentcolor">
-        <title>info icon</title>
-        <path d="M16 0 A16 16 0 0 1 16 32 A16 16 0 0 1 16 0 M19 15 L13 15 L13 26 L19 26 z M16 6 A3 3 0 0 0 16 12 A3 3 0 0 0 16 6"></path>
-      </svg>
-      <span class="lh-title ml3">
+    <div class="alert alert-warning">
+      <div class="container">
+        <div class="row">
+          <svg class="col-1" data-icon="info" viewBox="0 0 32 32" style="fill:currentcolor">
+            <title>info icon</title>
+            <path d="M16 0 A16 16 0 0 1 16 32 A16 16 0 0 1 16 0 M19 15 L13 15 L13 26 L19 26 z M16 6 A3 3 0 0 0 16 12 A3 3 0 0 0 16 6"></path>
+          </svg>
 
-        You must add an photo taken by you with the product for approve
-        that you are using this product. 
+          <div class="col-11">
+            <span>
 
-        <% if current_user && ApprovalImage.find_by(product: @product, user: current_user).try(:denied?)  %>
-          <span class="red db">The picture you sended before denied. Please send a photo again!</span>
-        <% end %>
+              You must add an photo taken by you with the product for approve
+              that you are using this product. 
 
-        <% if current_user && ApprovalImage.find_by(product: @product, user: current_user).try(:waiting_approval?)  %>
-          <span class="gold db">The picture you sended is waiting for approval.</span>
-        <% end %>
+              <% if current_user && ApprovalImage.find_by(product: @product, user: current_user).try(:denied?)  %>
+                <span class="text-danger">The picture you sended before denied. Please send a photo again!</span>
+              <% end %>
 
-        <div>
-          <% if ai = ApprovalImage.find_by(product: @product, user: current_user) %>
-            <% if ai.waiting_approval? %>
-              <%= image_tag ai.image, width: 64, class: "ba bw3 br3 b--gold" %>
-            <% else %>
-              <%= image_tag ai.image, width: 64, class: "ba bw3 br3 b--red" %>
-            <% end %>
-          <% end %>
-          <%= form_for [@product, ApprovalImage.new] do |f| %>
-            <%= f.file_field :image %>
-            <%= f.submit %>
-          <% end %>
+              <% if current_user && ApprovalImage.find_by(product: @product, user: current_user).try(:waiting_approval?)  %>
+                <span class="text-warning">The picture you sended is waiting for approval.</span>
+              <% end %>
+
+              <div>
+                <% if ai = ApprovalImage.find_by(product: @product, user: current_user) %>
+                  <% if ai.waiting_approval? %>
+                    <%= image_tag ai.image, width: 64, class: "ba bw3 br3 b--gold" %>
+                  <% else %>
+                    <%= image_tag ai.image, width: 64, class: "ba bw3 br3 b--red" %>
+                  <% end %>
+                <% end %>
+                <%= form_for [@product, ApprovalImage.new] do |f| %>
+                  <%= f.file_field :image %>
+                  <%= f.submit %>
+                <% end %>
+              </div>
+
+            </span>
+          </div>
+          
         </div>
-
-      </span>
+      </div>
     </div>
   <% end %>
 <% end %>

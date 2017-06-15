@@ -1,11 +1,15 @@
-<% @product = @comment.product %>
+<div class="container mt-5">
+  <div class="py-5 px-5 bg-white rounded">
+    <% @product = @comment.product %>
 
-<%= render "products/product_header" %>
+    <%= render "products/product_header" %>
 
-<div class="mb3 pb2 bb b--black-10">
-  <%= link_to "&larr; Back to Comments".html_safe,
-        product_comments_path(@comment.product),
-        class: "link blue" %>
+    <div class="mt-5 mb-3 pb-2 bb-1">
+      <%= link_to "&larr; Back to Comments".html_safe,
+            product_comments_path(@comment.product),
+            class: "link blue" %>
+    </div>
+
+    <%= render "comment", comment: @comment %>
+  </div>
 </div>
-
-<%= render "comment", comment: @comment %>

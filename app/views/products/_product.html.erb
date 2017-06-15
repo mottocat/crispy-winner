@@ -1,6 +1,6 @@
-<div class='db pv3 bb b--black-10 black cf hover-bg-light-yellow'>
-   
-  <div class="fl w-80">
+<div class='row product py-2'>
+  
+  <div class="col-8">
     <span class="b">
       <%= link_to product.brand + ' ' + product.name,
             product_comments_path(product),
@@ -22,11 +22,11 @@
     <% end %>
   </div>
 
-  <div class="fl w-10 tr">
+  <div class="col-2 text-right">
     <%= product.usage_manifests.with_status(:used).count %> used
   </div>
 
-  <div class="fl w-10 tr">
+  <div class="col-2 text-right">
     <%= product.usage_manifests.with_status(:using).where.not(approved_image_id: nil).count %> using
   </div>
 
