@@ -21,6 +21,14 @@ class ApprovalImagesController < ApplicationController
   def update
     authorize @approval_image
     @approval_image.update(permitted_attributes(@approval_image))
+
+    case @approval_image.status_previous_change.try(:last)
+    when 'approved'
+      ApprovalImageMailer.approved(@approval_image).deliver_now!
+    when 'denied'
+      ApprovalImageMailer.denied(@approval_image).deliver_now!
+    end
+
     redirect_to @product
   end
 

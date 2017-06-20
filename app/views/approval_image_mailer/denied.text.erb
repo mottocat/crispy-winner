@@ -1,0 +1,9 @@
+Your sended image for
+<%= "#{@approval_image.product.brand} #{@approval_image.product.name}" %> 
+was approved.
+
+Denied image here:
+<%= url_for @approval_image.image.url %>
+
+You can try add a new one.
+<%= url_for @approval_image.product %>

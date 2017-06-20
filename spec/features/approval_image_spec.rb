@@ -40,33 +40,58 @@ RSpec.describe "Approval Image", type: :feature do
   describe "when the moderator" do
     let!(:comment) {create :comment, product: product, author: user}
 
-    it "approves the image, the using count increases" do
-      visit product_comments_path(product)
-      expect(page).to have_content('0 using')
-      approval_image = create :approval_image, user: user, product: product
-      logout
-            
-      login admin
-      visit product_approval_images_path(product)
-      click_on "Approve"
-      visit product_comments_path(product)
-      expect(page).to have_css("#comment_#{comment.id} .bg-success")
-      expect(page).to have_content("1 using")
+    describe "approves" do
+      before do
+        visit product_comments_path(product)
+        expect(page).to have_content('0 using')
+        approval_image = create :approval_image, user: user, product: product
+        logout
+              
+        login admin
+        visit product_approval_images_path(product)
+      end
+
+      it "approves the image, the using count increases" do
+        click_on "Approve"
+        visit product_comments_path(product)
+        expect(page).to have_css("#comment_#{comment.id} .bg-success")
+        expect(page).to have_content("1 using")
+      end
+
+      it "sends an email to user" do
+        expect {
+          click_on "Approve"
+        }.to change { ActionMailer::Base.deliveries.count }.by(1)
+      end
+      
     end
 
-    it "denies the image, the using count is seem same" do
-      visit product_comments_path(product)
-      expect(page).to have_content('0 using')
-      create :approval_image, user: user, product: product
-      logout
+    describe "denies" do
 
-      login admin
-      visit product_approval_images_path(product)
-      click_on "Deny"
-      visit product_comments_path(product)
-      expect(page).to_not have_css("#comment_#{comment.id} .bg-success")
-      expect(page).to_not have_css("The picture you sended before denied")
-      expect(page).to have_content('0 using') 
+      before do
+        visit product_comments_path(product)
+        expect(page).to have_content('0 using')
+        create :approval_image, user: user, product: product
+        logout
+
+        login admin
+        visit product_approval_images_path(product)
+      end
+
+      it "denies the image, the using count is seem same" do
+        click_on "Deny"
+        visit product_comments_path(product)
+        expect(page).to_not have_css("#comment_#{comment.id} .bg-success")
+        expect(page).to_not have_css("The picture you sended before denied")
+        expect(page).to have_content('0 using') 
+      end
+
+      it "sends an email to the user" do
+        expect {
+          click_on "Deny"
+        }.to change { ActionMailer::Base.deliveries.count }.by(1)
+      end
+      
     end
 
     it "approves the image, can clickable on comment" do
