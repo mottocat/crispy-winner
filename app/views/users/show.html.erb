@@ -5,8 +5,13 @@
 
   <% ums.each do |um| %>
     <div class="row product py-2" id="using">
-      <div class="col-10">
+      <div class="col-8">
         <%= link_to um.product.name, product_comments_path(um.product), class: "link blue" %>
+      </div>
+      <div class="col-2">
+        <% if (comment = @user.comments.find_by(product: um.product)) %>
+          <%= link_to 'comment', comment %>
+        <% end %>
       </div>
       <div class="col-2">
         using
