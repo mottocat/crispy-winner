@@ -8,7 +8,8 @@ class ApprovalImagesController < ApplicationController
   end
 
   def create
-    @approval_image = ApprovalImage.new.tap do |ai|
+    @approval_image = ApprovalImage.find_or_initialize_by(
+                    product: @product, user: current_user).tap do |ai|
       ai.user = current_user
       ai.product = @product
       ai.status = :waiting_approval
