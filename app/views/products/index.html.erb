@@ -1,11 +1,5 @@
 <div class="container mt-5">
-  <%= form_tag products_path, method: :get, id: 'search_form' do %>
-    <%= text_field_tag :q , 
-                        params[:q],
-                        autofocus: true,
-                        placeholder: "Search",
-                        class: 'form-control form-control-lg px-5' %>
-  <% end %>
+  <%= render 'search_form' %>
 </div>
 
 <div class="container mt-3">

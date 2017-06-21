@@ -1,0 +1,10 @@
+<%= form_tag products_path, method: :get, id: 'search_form' do %>
+  <%= text_field_tag :q , 
+                      params[:q],
+                      autofocus: true,
+                      placeholder: "Search",
+                      autocomplete: 'off',
+                      autocorrect: 'off',
+                      autocapitalize: 'off',
+                      class: 'form-control form-control-lg px-5' %>
+<% end %>

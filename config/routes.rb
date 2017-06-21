@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
 
+  root to: "home#index"
+
   devise_for :users
-  root to: "products#index"
+
+  get 'home/index'
 
   resources :products do
     resources :comments, shallow: true
@@ -10,7 +13,6 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: :show
-
 
   namespace :administration do
     get "/" => "base#index"
