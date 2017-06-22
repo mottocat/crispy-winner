@@ -7,13 +7,11 @@
     
     <div class="mt-4">
       <%= render @product.comments %>
-    </div>
 
-    <div class="pv3 cf mb bt b--black-10">
-    <h2 class="h6 bb-1 mb-2 pb-2 text-muted mt-5">YOUR COMMENT</h2>
       <%= render 'form',
                   comment: (@comment or @product.comments.new),
                   product: @product %>
     </div>
+
   </div>
 </div>
