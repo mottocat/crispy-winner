@@ -1,24 +1,14 @@
-<ul class="nav nav-tabs mt-5">
+<ul class="nav nav-fill nav-tabs mt-5 mx--5 px-5">
   <li class="nav-item">
     <%= link_to "Overview",
                 @product,
-                class: "nav-link" %>
+                class: "nav-link #{active_class @product}" %>
   </li>
   <li class="nav-item">
     <%= link_to "Comments",
                 product_comments_path(@product),
-                class: "nav-link active" %>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled" href="#">Shops</a>
-  </li>
-    <li class="nav-item">
-    <a class="nav-link disabled" href="#">Forum</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled" href="#">Support</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled" href="#">...</a>
+                class: "nav-link #{active_class(product_comments_path(@product))}" %>
   </li>
 </ul>
+
+
