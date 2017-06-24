@@ -21,6 +21,7 @@ gem 'carrierwave', '~> 1.0'
 gem 'bootstrap', '~> 4.0.0.alpha5'
 gem 'pundit'
 gem 'highline'
+gem 'forest_liana'
 
 group :development, :test do
   gem 'byebug', platform: :mri

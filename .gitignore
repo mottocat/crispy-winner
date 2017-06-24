@@ -18,6 +18,7 @@
 
 public/uploads/
 
+.env
 .env.development
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
