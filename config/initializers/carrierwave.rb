@@ -7,7 +7,6 @@ CarrierWave.configure do |config|
       aws_secret_access_key: ENV['AWS_SECRET_KEY'],
       region:                ENV['AWS_S3_REGION']
     }
-    config.fog_host       = ENV['AWS_S3_ASSET_URL']
     config.fog_directory  = ENV['AWS_S3_BUCKET_NAME']
     config.fog_public     = false
     config.fog_attributes = { cache_control: "public, max-age=#{365.day.to_i}" }
