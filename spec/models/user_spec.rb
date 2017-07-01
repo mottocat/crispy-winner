@@ -12,9 +12,11 @@ RSpec.describe User, type: :model do
   it { is_expected.to validate_presence_of :first_name }
   it { is_expected.to validate_presence_of :last_name }
 
-  it { is_expected.to have_many :usage_manifests }
-  it { is_expected.to have_many :products }
-  it { is_expected.to have_many(:comments).with_foreign_key('author_id') }
+  it { is_expected.to have_many(:usage_manifests).dependent(:destroy) }
+  it { is_expected.to have_many(:products).dependent(:nullify) }
+  it { is_expected.to have_many(:comments).
+                        with_foreign_key('author_id').
+                        dependent(:destroy) }
 
   it "#full_name" do
     user.update first_name: "Firstname", last_name: "Lastname"

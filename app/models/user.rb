@@ -5,9 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   # Associatons
-  has_many :usage_manifests
-  has_many :products, through: :usage_manifests
-  has_many :comments, foreign_key: 'author_id'
+  has_many :usage_manifests, dependent: :destroy
+  has_many :products, through: :usage_manifests, dependent: :nullify
+  has_many :comments, foreign_key: 'author_id', dependent: :destroy
 
   # Validations
   validates_presence_of :first_name, :last_name

@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
   # Assciations
-  has_many :comments
-  has_many :usage_manifests
+  has_many :comments, dependent: :destroy
+  has_many :usage_manifests, dependent: :destroy
   has_many :users, through: :usage_manifests
 
   # Validations
