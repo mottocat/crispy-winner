@@ -1,4 +1,5 @@
 <h1 class="h3">
+  <%= @product.brand %>
   <%= @product.name %>
 
   <% if policy(@product).edit? %>
@@ -17,7 +18,6 @@
 
 
 <ul class="nav text-muted">
-  <li class="nav-link">by <%= @product.brand %></li>
   <li class="nav-link"><%= @product.using_users_count %> using</li>
   <li class="nav-link"><%= @product.used_users_count %> used</li>
   <li class="nav-link">
