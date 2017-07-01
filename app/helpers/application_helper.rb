@@ -1,4 +1,13 @@
 module ApplicationHelper
+
+  def full_title page_title
+    page_title.empty? ? "Crispy Winner" : "#{page_title} - Crispy Winner".html_safe
+  end
+
+  def title title
+    provide :title, title
+  end
+
   def humanize_status_for status
     {
       using: 'I am using this product now',
