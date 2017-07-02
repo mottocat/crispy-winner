@@ -5,6 +5,7 @@ RSpec.describe ApprovalImagesController, type: :controller do
   let(:user) { create :user }
   let(:admin) { create :admin }
   let!(:product) { create :product }
+  let(:usage_manifest) { create :usage_manifest, product: product, user: user }
 
   before do
     sign_in user

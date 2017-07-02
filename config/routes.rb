@@ -23,6 +23,10 @@ Rails.application.routes.draw do
 
   namespace :forest do
     resources :brands
+    post '/actions/make-approved' => 'approval_images#make_approved'
+    post '/actions/make-denied' => 'approval_images#make_denied'
+    post '/actions/make-waiting-approval' => 'approval_images#make_waiting_approval'
   end
+
   mount ForestLiana::Engine => '/forest'
 end

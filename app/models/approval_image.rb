@@ -17,10 +17,9 @@ class ApprovalImage < ApplicationRecord
 
   # Callbacks
   after_save do |approval_image|
-    if approval_image.approved?
-      usage_manifest = UsageManifest.find_by(user: approval_image.user,
-                                      product: approval_image.product)
-      usage_manifest.approved_image = approval_image
+    if usage_manifest = UsageManifest.find_by(user: approval_image.user,
+                                    product: approval_image.product)
+      usage_manifest.approved_image = approval_image.approved? ? approval_image : nil
       usage_manifest.save
     end
   end
