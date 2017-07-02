@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-
-  mount ForestLiana::Engine => '/forest'
   root to: "home#index"
 
   devise_for :users
@@ -22,4 +20,9 @@ Rails.application.routes.draw do
     resources :comments, only: :index
     resources :usage_approvals, only: :index
   end
+
+  namespace :forest do
+    resources :brands
+  end
+  mount ForestLiana::Engine => '/forest'
 end
