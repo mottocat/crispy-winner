@@ -2,4 +2,5 @@
 <%= render 'nav' %>
 <%= render 'messages' %>
 <%= yield %>
+<%= render 'google_analytics' if Rails.env.production? %>
 <%= render 'html_end' %>
