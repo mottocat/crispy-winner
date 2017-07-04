@@ -9,7 +9,7 @@ class ProductPolicy < ApplicationPolicy
   end
 
   def new?
-    current_user
+    current_user.try(:admin?)
   end
 
   def create?

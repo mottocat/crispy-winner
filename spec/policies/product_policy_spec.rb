@@ -16,13 +16,15 @@ RSpec.describe ProductPolicy do
 
   permissions :new? do
     it "grant access" do
-      expect(subject).to permit(user, product)
+      expect(subject).to_not permit(user, product)
+      expect(subject).to permit(admin, product)
     end
   end
 
   permissions :create? do
     it "grant access" do
-      expect(subject).to permit(user, product)
+      expect(subject).to permit(admin, product)
+      expect(subject).to_not permit(user, product)
     end
   end
 

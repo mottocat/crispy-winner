@@ -61,7 +61,7 @@ RSpec.describe ProductsController, type: :controller do
 
   describe "GET #new" do
     it "assigns a new product as @product" do
-      allow(controller).to receive(:current_user).and_return(user)
+      allow(controller).to receive(:current_user).and_return(admin)
       get :new
       expect(assigns(:product)).to be_a_new(Product)
     end

@@ -4,7 +4,7 @@ RSpec.describe "Product", type: :feature do
   
 
   it "creates a new product" do
-    login
+    login create(:admin)
     visit new_product_path
     expect {
       fill_in "product_name", with: "The Product Name"
