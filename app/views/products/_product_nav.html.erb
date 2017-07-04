@@ -5,7 +5,7 @@
                 class: "nav-link #{active_class @product}" %>
   </li>
   <li class="nav-item">
-    <%= link_to "Comments",
+    <%= link_to "Comments (#{@product.comments.count})",
                 product_comments_path(@product),
                 class: "nav-link #{active_class(product_comments_path(@product))}" %>
   </li>
