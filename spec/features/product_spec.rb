@@ -48,11 +48,11 @@ RSpec.describe "Product", type: :feature do
     visit products_path
 
     fill_in "q", with: "XYZ"
-    page.execute_script("$('form#search_form').submit()")
+    page.execute_script("document.getElementById('search_form').submit();")
     expect(page).to have_content("XYZ Mobile")
 
     fill_in "q", with: "ABC"
-    page.execute_script("$('form#search_form').submit()")
+    page.execute_script("document.getElementById('search_form').submit()")
     expect(page).to have_content("ABC Biscuits")
   end
 
