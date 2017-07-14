@@ -23,7 +23,7 @@
     <% @comments.each do |comment| %>
       <tr id="<%= dom_id comment %>">
         <td>
-          <%= link_to "#{comment.product.brand} #{comment.product.name}", comment.product %>
+          <%= link_to comment.product.display, comment.product %>
         </td>
         <td>
           <%= link_to comment.author.full_name, comment.author %>

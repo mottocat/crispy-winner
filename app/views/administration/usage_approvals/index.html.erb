@@ -32,7 +32,7 @@
     <% @approval_images.each do |ai| %>
       <tr id="<%= dom_id ai %>">
         <td>
-          <%= link_to "#{ai.product.brand} #{ai.product.name}", ai.product, class: "link blue" %>
+          <%= link_to ai.product.display, ai.product, class: "link blue" %>
         </td>
         <td>
           <%= link_to ai.user.full_name, ai.user, class: "link blue" %>

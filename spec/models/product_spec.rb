@@ -18,4 +18,9 @@ RSpec.describe Product, type: :model do
     expect(described_class.search("XYZ")).to be_include(xyz)
     expect(described_class.search("ABC")).to be_include(abc)
   end
+
+  it "#display" do
+    product = create :product, brand: "Brand", name: "Product"
+    expect(product.display).to eq('Brand Product')
+  end
 end

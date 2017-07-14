@@ -8,7 +8,7 @@
   <% ums.each do |um| %>
     <div class="row product py-2" id="using">
       <div class="col-8">
-        <%= link_to um.product.name, product_comments_path(um.product), class: "link blue" %>
+        <%= link_to um.product.display, product_comments_path(um.product), class: "link blue" %>
       </div>
       <div class="col-2">
         <% if (comment = @user.comments.find_by(product: um.product)) %>
@@ -29,7 +29,7 @@
   <% ums.each do |um| %>
     <div class="row product py-2" id="used">
       <div class="col-8">
-        <%= link_to um.product.name, product_comments_path(um.product), class: "link blue" %>
+        <%= link_to um.product.display, product_comments_path(um.product), class: "link blue" %>
       </div>
       <div class="col-2">
         <% if (comment = @user.comments.find_by(product: um.product)) %>

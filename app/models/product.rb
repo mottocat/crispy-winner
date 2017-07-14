@@ -11,6 +11,8 @@ class Product < ApplicationRecord
   include PgSearch
   pg_search_scope :search, against: { name: 'A', brand: 'B' }
 
-
+  def display
+    "#{brand} #{name}"
+  end
 
 end
