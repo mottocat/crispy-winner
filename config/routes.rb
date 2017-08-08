@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   get 'home/index'
 
+  resources :categories
+
   resources :products do
     resources :comments, shallow: true
     resource :usage_manifests, only: [:create, :destroy]

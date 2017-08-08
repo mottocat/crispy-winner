@@ -1,0 +1,20 @@
+<%= title @category.name %>
+
+<div class="container mt-5">
+  <div class="py-5 px-5 bg-white rounded">
+    <h1 class="h3">
+      <%= @category.name %>
+
+      <% if policy(@category).edit? %>
+        <%= link_to '[Edit]',
+                    edit_category_path(@category),
+                    class: 'link h6' %>
+      <% end %>
+
+    </h1>
+
+    <h3 class="mt-3 h5 bb-1 pb-2 text-muted">OVERVIEW</h3>
+
+    <%= render @category.products %>
+  </div>
+</div>

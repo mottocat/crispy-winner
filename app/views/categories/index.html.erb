@@ -1,0 +1,44 @@
+<%= title "#{@categories.size} Products" %>
+
+<div class="container mt-5">
+  <div class="py-5 px-5 bg-white rounded">
+    <% if policy(Category).new? %>
+      <%= link_to '[Add new]',
+                  new_category_path,
+                  class: 'float-right' %>
+    <% end %>
+    <h3 class="h6 bb-1 mb-3 pb-2 text-muted">CATEGORIES (<%= @categories.size %>)</h3>
+    
+    <% @categories.each do |category| %>
+      <div class='row product py-2'>
+        
+        <div class="col-8">
+          <span class="b">
+            <%= link_to category.name,
+                  category,
+                  class: 'link black' %>
+          </span>
+          
+          <% if policy(category).edit? %>
+            <%= link_to 'Edit',
+                        edit_category_path(category),
+                        class: 'link silver f7 dib ml2' %>
+          <% end %>
+
+          <% if policy(category).destroy? %>
+            <%= link_to 'x',
+                      category, 
+                      method: :delete,
+                      data: { confirm: 'Are you sure?' },
+                      class: 'link silver f7 dib ml2' %>
+          <% end %>
+        </div>
+
+        <div class="col-2 text-right">
+          <%= category.products.count %> products
+        </div>
+
+      </div>
+    <% end %>
+  </div>
+</div>

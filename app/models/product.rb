@@ -3,6 +3,7 @@ class Product < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :usage_manifests, dependent: :destroy
   has_many :users, through: :usage_manifests
+  belongs_to :category, required: false
 
   # Validations
   validates :name, :brand, presence: true

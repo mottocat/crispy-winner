@@ -4,11 +4,13 @@ RSpec.describe "Product", type: :feature do
   
 
   it "creates a new product" do
+    create :category, name: "The Category"
     login create(:admin)
     visit new_product_path
     expect {
       fill_in "product_name", with: "The Product Name"
       fill_in "product_brand" , with: "The Brand"
+      select "The Category", from: 'product[category_id]'
       click_button "Create Product"
     }.to change(Product, :count).by(1)
   end

@@ -7,6 +7,11 @@ FactoryGirl.define do
   factory :product do
     name { Faker::Name.title }
     brand Faker::Company.name
+    category
+  end
+
+  factory :category do
+    name { Faker::Name.title }
   end
 
   factory :user do

@@ -1,0 +1,25 @@
+<%= form_with(model: category, local: true) do |f| %>
+  <% if category.errors.any? %>
+    <div class="alert alert-warning">
+      <span class="lh-title ml3">
+        <%= pluralize(category.errors.count, "error") %> prohibited this category from being saved:
+      </span>
+
+      <ul>
+        <% category.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field  :name, autofocus: true, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit nil, class: "btn btn-secondary" %>
+  </div>
+<% end %>

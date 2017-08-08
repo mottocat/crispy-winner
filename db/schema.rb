@@ -10,78 +10,95 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170608224017) do
+ActiveRecord::Schema.define(version: 20170807190359) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "approval_images", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "product_id"
-    t.string   "image"
-    t.integer  "status",     default: 0
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.index ["product_id"], name: "index_approval_images_on_product_id", using: :btree
-    t.index ["user_id", "product_id"], name: "index_approval_images_on_user_id_and_product_id", unique: true, using: :btree
-    t.index ["user_id"], name: "index_approval_images_on_user_id", using: :btree
-  end
-
-  create_table "comments", force: :cascade do |t|
-    t.text     "body"
-    t.integer  "product_id"
+  create_table "approval_images", id: :serial, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "product_id"
+    t.string "image"
+    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "author_id"
-    t.index ["author_id"], name: "index_comments_on_author_id", using: :btree
-    t.index ["product_id"], name: "index_comments_on_product_id", using: :btree
+    t.index ["product_id"], name: "index_approval_images_on_product_id"
+    t.index ["user_id", "product_id"], name: "index_approval_images_on_user_id_and_product_id", unique: true
+    t.index ["user_id"], name: "index_approval_images_on_user_id"
   end
 
-  create_table "products", force: :cascade do |t|
-    t.string   "name"
-    t.string   "brand"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.integer  "used_users_count",  default: 0, null: false
-    t.integer  "using_users_count", default: 0, null: false
-    t.index ["used_users_count"], name: "index_products_on_used_users_count", using: :btree
-    t.index ["using_users_count"], name: "index_products_on_using_users_count", using: :btree
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "usage_manifests", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "product_id"
-    t.integer  "status"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-    t.integer  "approved_image_id"
-    t.index ["product_id"], name: "index_usage_manifests_on_product_id", using: :btree
-    t.index ["user_id"], name: "index_usage_manifests_on_user_id", using: :btree
+  create_table "comments", id: :serial, force: :cascade do |t|
+    t.text "body"
+    t.integer "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "author_id"
+    t.index ["author_id"], name: "index_comments_on_author_id"
+    t.index ["product_id"], name: "index_comments_on_product_id"
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "",    null: false
-    t.string   "encrypted_password",     default: "",    null: false
-    t.string   "reset_password_token"
+  create_table "pg_search_documents", id: :serial, force: :cascade do |t|
+    t.text "content"
+    t.string "searchable_type"
+    t.integer "searchable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "products", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.string "brand"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "used_users_count", default: 0, null: false
+    t.integer "using_users_count", default: 0, null: false
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_products_on_category_id"
+    t.index ["used_users_count"], name: "index_products_on_used_users_count"
+    t.index ["using_users_count"], name: "index_products_on_using_users_count"
+  end
+
+  create_table "usage_manifests", id: :serial, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "product_id"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "approved_image_id"
+    t.index ["product_id"], name: "index_usage_manifests_on_product_id"
+    t.index ["user_id"], name: "index_usage_manifests_on_user_id"
+  end
+
+  create_table "users", id: :serial, force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.inet     "current_sign_in_ip"
-    t.inet     "last_sign_in_ip"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.string   "first_name"
-    t.string   "last_name"
-    t.boolean  "admin",                  default: false
-    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.boolean "admin", default: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "approval_images", "products"
   add_foreign_key "approval_images", "users"
   add_foreign_key "comments", "products"
+  add_foreign_key "products", "categories"
   add_foreign_key "usage_manifests", "products"
   add_foreign_key "usage_manifests", "users"
 end
