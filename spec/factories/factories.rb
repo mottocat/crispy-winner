@@ -7,6 +7,8 @@ FactoryGirl.define do
   factory :product do
     name { Faker::Name.title }
     brand Faker::Company.name
+    # image File.new("#{Rails.root}/spec/support/images/products/product1.jpg")
+    image { Rack::Test::UploadedFile.new(Rails.root.join('spec', 'support', 'images', 'products', 'product1.jpg'), 'image/jpeg') }
     category
   end
 

@@ -21,4 +21,8 @@ module TestHelpers
   ensure
     page.evaluate_script "window.confirm = window.original_confirm_function"
   end
+  
+  def images_dir
+    "#{Rails.root}/spec/support/images"
+  end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170808161158) do
+ActiveRecord::Schema.define(version: 20171102204134) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20170808161158) do
     t.integer "used_users_count", default: 0, null: false
     t.integer "using_users_count", default: 0, null: false
     t.bigint "category_id"
+    t.string "image"
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["used_users_count"], name: "index_products_on_used_users_count"
     t.index ["using_users_count"], name: "index_products_on_using_users_count"

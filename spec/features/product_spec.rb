@@ -10,6 +10,7 @@ RSpec.describe "Product", type: :feature do
     expect {
       fill_in "product_name", with: "The Product Name"
       fill_in "product_brand" , with: "The Brand"
+      attach_file "Image", "#{images_dir}/products/product1.jpg"
       select "The Category", from: 'product[category_id]'
       click_button "Create Product"
     }.to change(Product, :count).by(1)
@@ -57,6 +58,5 @@ RSpec.describe "Product", type: :feature do
     page.execute_script("document.getElementById('search_form').submit()")
     expect(page).to have_content("ABC Biscuits")
   end
-
 
 end

@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
+  mount_uploader :image, ImageUploader
+  
   # Assciations
   has_many :comments, dependent: :destroy
   has_many :usage_manifests, dependent: :destroy
