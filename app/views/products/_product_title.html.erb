@@ -1,5 +1,5 @@
 <h1 class="h3">
-  <%= image_tag @product.image_url, width: 50, class: "img-thumbnail" %>
+  <%= image_tag(@product.image_url, width: 50, class: "img-thumbnail") if @product.image? %>
   <%= @product.brand %>
   <%= @product.name %>
 
